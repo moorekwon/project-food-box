@@ -27,7 +27,7 @@ SECRETS = SECRETS_FULL['base']
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = SECRETS['SECRET_KEY']
 
-# AUTH_USER_MODEL = 'members.User'
+AUTH_USER_MODEL = 'members.User'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -51,8 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'main.apps.MainConfig',
-    'members.apps.MembersConfig',
+    'main',
+    'members',
 
     'django_extensions',
     'rest_framework',
