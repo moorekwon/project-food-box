@@ -1,0 +1,45 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet">
+    <title>Foodbox main page</title>
+</head>
+<body>
+<header>
+    <div class="overlay"></div>
+    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+        <source src="../static/images/video (3).mp4" type="video/mp4">
+    </video>
+    <div class="container h-100">
+        <div class="d-flex h-100 text-center align-items-center">
+            <div class="w-100 text-white">
+                <h1 class="display-3">Foodbox</h1>
+                <p class="lead mb-0">나의 건강, 올바른 먹거리를 위해 직접 자신의 냉장고를 관리해 보세요!</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="my-5">
+    <div class="container">
+        <a class="btn btn-outline-secondary mx-auto" href="{% url 'signup' %}">지금 시작하기</a>
+        <div class="row">
+            <div class="col-md-8 my-4">
+                <p>등록하신 계정이 있나요? <a href="{% url 'signin' %}" class="strong">지금 로그인!</a></p>
+                <p class="mb-0">
+                    Created by <a href="https://medium.com/moorekwon">moorekwon</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
