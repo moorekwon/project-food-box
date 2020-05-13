@@ -1,5 +1,4 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -32,7 +31,6 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    # REQUIRED_FIELDS = ['']
 
     objects = UserManager()
 
