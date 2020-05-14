@@ -15,5 +15,7 @@ DATABASES = {
     }
 }
 
+print("os.path.join(BASE_DIR, 'db.sqlite3') >> ", os.path.join(BASE_DIR, 'db.sqlite3'))
+
 ALLOWED_HOSTS += []
 INSTALLED_APPS += []
