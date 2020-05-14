@@ -1,5 +1,9 @@
 from django.shortcuts import render
 
 
-def base(request):
-    return render(request, 'main/base.html')
+def main(request):
+    return render(request, 'main/main.html')
+
+
+def fridge(request):
+    return render(request, 'main/fridge.html')
