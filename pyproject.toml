@@ -10,6 +10,9 @@ django = "^3.0.6"
 djangorestframework = "^3.11.0"
 django-extensions = "^2.2.9"
 notebook = "^6.0.3"
+pillow = "^7.1.2"
+django-storages = "^1.9.1"
+boto3 = "^1.13.10"
 
 [tool.poetry.dev-dependencies]
 

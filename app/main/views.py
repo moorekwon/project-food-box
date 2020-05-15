@@ -1,12 +1,20 @@
 from django.shortcuts import render
 
+from main.models import Ingredient
+
 
 def main(request):
     return render(request, 'main/main.html')
 
 
 def fridge(request):
-    return render(request, 'main/fridge/fridge.html')
+    if request.user.is_authenticated:
+        ingredients = Ingredient.objects.filter(user=request.user)
+
+        context = {
+            'ingredients': ingredients,
+        }
+        return render(request, 'main/fridge/fridge.html', context)
 
 
 def add_ingredient(request):

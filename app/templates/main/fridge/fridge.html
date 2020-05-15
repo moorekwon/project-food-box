@@ -72,6 +72,8 @@
 
 
 
+
+
 </style>
 {% endblock %}
 
@@ -95,5 +97,10 @@
         </div>
     </div>
 </div>
+
+{% for ingredient in ingredients %}
+{{ ingredient.freshness }}
+{{ ingredient.left_days }}
+{% endfor %}
 {% endif %}
 {% endblock %}

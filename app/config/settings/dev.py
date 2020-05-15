@@ -19,3 +19,4 @@ print("os.path.join(BASE_DIR, 'db.sqlite3') >> ", os.path.join(BASE_DIR, 'db.sql
 
 ALLOWED_HOSTS += []
 INSTALLED_APPS += []
+
