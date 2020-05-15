@@ -11,14 +11,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet">
-    <title>Foodbox fridge ingredients page</title>
+    <title>Foodbox fridge add page</title>
 </head>
 
 <body>
-<form action="{% url 'main:add-ingredient' %}" method="get" class="form-inline mt-5">
+<form action="{% url 'main:fridge-add' %}" method="get" class="form-inline mt-5">
     <input name="search_text" type="text" class="form-control mr-sm-2 mb-3">
     <button type="submit" class="btn btn-sm btn-outline-dark mb-3">재료 검색</button>
-    <a href="{% url 'main:add-ingredient' %}" class="btn btn-sm btn-outline-dark ml-2 mb-3">전체 보기</a>
+    <a href="{% url 'main:fridge-add' %}" class="btn btn-sm btn-outline-dark ml-2 mb-3">전체 보기</a>
 </form>
 <div class="d-flex" id="wrapper">
 
@@ -35,7 +35,7 @@
         </div>
     </div>
     <!-- /#sidebar-wrapper -->
-    
+    {{ ingredient_infos }}
     {% block content %}
     {% endblock %}
 </div>

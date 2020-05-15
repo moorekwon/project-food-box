@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from main.models import Ingredient
+from main.models import Ingredient, IngredientInfo
 
 
 def main(request):
@@ -15,10 +15,39 @@ def fridge(request):
             'ingredients': ingredients,
         }
         return render(request, 'main/fridge/fridge.html', context)
+    return render(request, 'main/fridge/fridge.html')
 
 
-def add_ingredient(request):
-    return render(request, 'main/fridge/ingredients.html')
+def fridge_add(request):
+    ingredient_infos = IngredientInfo.objects.all().order_by('name')
+
+    search_text = request.GET.get('search_text')
+
+    if search_text:
+        ingredient_infos = ingredient_infos.filter(name__contains=search_text)
+    else:
+        ingredient_infos = ingredient_infos
+
+    context = {
+        'ingredient_infos': ingredient_infos,
+    }
+    return render(request, 'main/fridge/fridge_add.html', context)
+
+
+def add_ingredient(request, pk):
+    ingredient_info = IngredientInfo.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        date = request.POST['input_date']
+
+        Ingredient.objects.create(input_date=date, user=request.user, info=ingredient_info)
+        return redirect('main:fridge')
+
+    else:
+        context = {
+            'ingredient_info': ingredient_info,
+        }
+        return render(request, 'main/fridge/add_ingredient.html', context)
 
 
 def add_vegetable(request):

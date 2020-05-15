@@ -13,23 +13,23 @@ class IngredientInfo(models.Model):
         ('T', 'Room Temperature')
     )
 
+    name = models.CharField(max_length=50)
     keeping_days = models.PositiveIntegerField()
     kcalories = models.PositiveIntegerField()
     image = models.ImageField(upload_to='images/ingredients/')
     fridger = models.CharField(max_length=2, choices=WHERE)
 
     def __str__(self):
-        return f'{self.ingredient.name}'
+        return f'{self.name}'
 
 
 class Ingredient(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
     info = models.OneToOneField(IngredientInfo, on_delete=models.CASCADE)
     input_date = models.DateField()
 
     def __str__(self):
-        return self.name
+        return self.info.name
 
     def freshness(self):
         keeping_days = int(self.info.keeping_days)
