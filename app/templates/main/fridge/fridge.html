@@ -71,12 +71,13 @@
     }
 
 
+
 </style>
 {% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
-<a href="" class="w3-button w3-circle">+</a>
+<a href="{% url 'main:add-ingredient' %}" class="w3-button w3-circle">+</a>
 
 <p class="lead mt-4" style="text-align: center; font-size: 0.9rem; line-height: 2;">
     칼로리 100g 기준<br>

@@ -1,0 +1,43 @@
+<!doctype html>
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ingredients.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet">
+    <title>Foodbox fridge ingredients page</title>
+</head>
+
+<body>
+<form action="{% url 'main:add-ingredient' %}" method="get" class="form-inline mt-5">
+    <input name="search_text" type="text" class="form-control mr-sm-2 mb-3">
+    <button type="submit" class="btn btn-sm btn-outline-dark mb-3">재료 검색</button>
+    <a href="{% url 'main:add-ingredient' %}" class="btn btn-sm btn-outline-dark ml-2 mb-3">전체 보기</a>
+</form>
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="list-group list-group-flush">
+            <a href="{% url 'main:add-vegetable' %}" class="list-group-item list-group-item-action bg-light">채소/과일</a>
+            <a href="{% url 'main:add-meat' %}" class="list-group-item list-group-item-action bg-light">육류</a>
+            <a href="{% url 'main:add-marine' %}" class="list-group-item list-group-item-action bg-light">수산물</a>
+            <a href="{% url 'main:add-grain' %}" class="list-group-item list-group-item-action bg-light">곡물/견과류</a>
+            <a href="{% url 'main:add-sauce' %}" class="list-group-item list-group-item-action bg-light">양념/소스</a>
+            <a href="{% url 'main:add-milk' %}" class="list-group-item list-group-item-action bg-light">가공/유제품</a>
+            <a href="{% url 'main:add-others' %}" class="list-group-item list-group-item-action bg-light">기타</a>
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>
