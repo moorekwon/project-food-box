@@ -30,7 +30,7 @@ body {
   margin-left: 0;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 500px) {
   #sidebar-wrapper {
     margin-left: 0;
   }
