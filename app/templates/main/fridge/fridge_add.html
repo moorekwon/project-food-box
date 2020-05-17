@@ -37,8 +37,8 @@
     <!-- /#sidebar-wrapper -->
     <div class="my-2">
         <ul class="row list-unstyled m-0">
-            {% for ingredient_info in ingredient_infos %}
-            <a href="{% url 'main:add-ingredient' pk=ingredient_info.pk %}" style="color: rgba(0, 0, 0, 0.9);">
+            {% for ingredient in ingredients %}
+            <a href="{% url 'main:add-ingredient' pk=ingredient.pk %}" style="color: rgba(0, 0, 0, 0.9);">
                 <li class="col">
                     <svg class="bi bi-check-box" width="1.6em" height="1.6em" viewBox="0 0 20 20" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
@@ -50,13 +50,13 @@
                               clip-rule="evenodd"></path>
                     </svg>
                     <div class="bg-light text-center rounded">
-                        <img src="{{ ingredient_info.image.url }}" alt="" class="bi bi-alarm-fill" width="100em"
+                        <img src="{{ ingredient.image.url }}" alt="" class="bi bi-alarm-fill" width="100em"
                              height="100em">
                     </div>
 
                     <div class="text-muted text-center">
                         <div>
-                            <span>{{ ingredient_info.name }}</span>
+                            <span>{{ ingredient.name }}</span>
                         </div>
                     </div>
                 </li>

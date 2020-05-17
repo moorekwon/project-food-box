@@ -2,11 +2,12 @@ import datetime
 
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils import timezone
 
 User = get_user_model()
 
 
-class IngredientInfo(models.Model):
+class Ingredient(models.Model):
     WHERE = (
         ('F', 'Freezer'),
         ('R', 'Refrigerator'),
@@ -23,16 +24,16 @@ class IngredientInfo(models.Model):
         return f'{self.name}'
 
 
-class Ingredient(models.Model):
+class MyStoredIngredient(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    info = models.OneToOneField(IngredientInfo, on_delete=models.CASCADE)
-    input_date = models.DateField()
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    input_date = models.DateField(default=timezone.now())
 
     def __str__(self):
-        return self.info.name
+        return self.ingredient.name
 
     def freshness(self):
-        keeping_days = int(self.info.keeping_days)
+        keeping_days = int(self.ingredient.keeping_days)
         keeping_date = self.input_date + datetime.timedelta(days=keeping_days)
         left = keeping_date - datetime.datetime.today().date()
         left_days = left.days
@@ -47,7 +48,7 @@ class Ingredient(models.Model):
             return '신선도 위험'
 
     def left_days(self):
-        keeping_days = int(self.info.keeping_days)
+        keeping_days = int(self.ingredient.keeping_days)
         keeping_date = self.input_date + datetime.timedelta(days=keeping_days)
         left = keeping_date - datetime.datetime.today().date()
         left_days = left.days

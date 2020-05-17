@@ -69,6 +69,9 @@
     .red {
         background-color: #f2552c;
     }
+
+
+
 </style>
 {% endblock %}
 
@@ -82,6 +85,7 @@
         class="mr-3 w3-container red"></span>
 </p>
 
+{% if not my_stored_ingredients %}
 <div class="container my-5 py-5">
     <div class="row justify-content-center align-items-center">
         <div class="col-md-8 col-lg-7">
@@ -89,8 +93,68 @@
                data-toggle="animation" data-animation="fadeUp" data-animation-order="0" data-animation-trigger="load">
                 안녕하세요 {{ request.user }}님!
             </p>
+            <p class="font-weight-medium text-center text-xs text-white text-muted animate"
+               data-toggle="animation" data-animation="fadeUp" data-animation-order="0" data-animation-trigger="load">
+                냉장고에 있는 음식 재료들을 추가하여 관리해 보세요!
+            </p>
         </div>
     </div>
 </div>
+{% endif %}
+
+{% if my_stored_ingredients %}
+<div class="my-5">
+    <div class="d-flex mb-4">
+        <h2 class="mb-0">냉동실</h2>
+    </div>
+
+    <ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list py-4 m-0">
+        {% for my_stored_ingredient in my_stored_ingredients %}
+        {% if my_stored_ingredient.ingredient.fridger == 'F' %}
+        <li class="col mb-4">
+            <a href="" class="close">
+                <span aria-hidden="true">&times;</span>
+            </a>
+
+            <div class="bg-light text-center rounded">
+                <img src="{{ my_stored_ingredient.ingredient.image.url }}" alt="" class="bi bi-alarm-fill" width="100em"
+                     height="100em">
+            </div>
+
+            <div class="name text-muted text-center">
+                <div>
+                    <span>{{ my_stored_ingredient.ingredient.name }}</span>
+                </div>
+                <div class="border-bottom border-gray">
+                    <p class="mb-0 small">
+                        {% if my_stored_ingredient.freshness == '신선도 위험' %}
+                        <strong class="text-gray-dark"> {{ my_stored_ingredient.freshness }} <span
+                                class="w3-container red"></span></strong><br>
+                        <span class="text-danger">({{ my_stored_ingredient.left_days }}일 지남)</span>
+                        {% elif my_stored_ingredient.freshness == '신선도 높음' %}
+                        <strong class="text-gray-dark"> {{ my_stored_ingredient.freshness }} <span
+                                class="w3-container green"></span></strong><br>
+                        <span>({{ my_stored_ingredient.left_days }}일 남음)</span>
+                        {% elif my_stored_ingredient.freshness == '신선도 보통' %}
+                        <strong class="text-gray-dark"> {{ my_stored_ingredient.freshness }} <span
+                                class="w3-container yellow"></span></strong><br>
+                        <span>({{ my_stored_ingredient.left_days }}일 남음)</span>
+                        {% else %}
+                        <strong class="text-gray-dark"> {{ my_stored_ingredient.freshness }} <span
+                                class="w3-container red"></span></strong><br>
+                        <span>({{ my_stored_ingredient.left_days }}일 남음)</span>
+                        {% endif %}
+                    </p>
+                    <p class="mb-0 small">
+                        <strong class="text-gray-dark">{{ my_stored_ingredient.ingredient.kcalories }} kcal</strong>
+                    </p>
+                </div>
+            </div>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
 {% endif %}
 {% endblock %}

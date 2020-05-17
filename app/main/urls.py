@@ -19,6 +19,6 @@ urlpatterns = [
     path('fridge/add/others/', views.add_others, name='add-others'),
 
     path('memo/', views.memo, name='memo'),
-    path('menu/', views.menu, name='menu'),
+    path('blog/', views.blog, name='blog'),
     path('recommendation/', views.recommendation, name='recommendation'),
 ]
