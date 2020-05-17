@@ -2,7 +2,6 @@ import datetime
 
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.utils import timezone
 
 User = get_user_model()
 
@@ -27,7 +26,7 @@ class Ingredient(models.Model):
 class MyStoredIngredient(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    input_date = models.DateField(default=timezone.now())
+    input_date = models.DateField(default=datetime.date.today)
 
     def __str__(self):
         return self.ingredient.name

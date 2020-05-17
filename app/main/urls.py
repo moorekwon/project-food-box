@@ -18,6 +18,8 @@ urlpatterns = [
     path('fridge/add/milk/', views.add_milk, name='add-milk'),
     path('fridge/add/others/', views.add_others, name='add-others'),
 
+    path('fridge/delete/<int:pk>/', views.delete_ingredient, name='delete-ingredient'),
+
     path('memo/', views.memo, name='memo'),
     path('blog/', views.blog, name='blog'),
     path('recommendation/', views.recommendation, name='recommendation'),

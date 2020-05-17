@@ -17,7 +17,9 @@
         </div>
     </div>
     <button type="submit" class="btn btn-sm btn-outline-dark mt-2">추가하기</button>
+    {% if previous_btn %}
     <p class="mt-4 strong">{{ error_msg }}</p>
-    <a href="{% url 'main:fridge-add' %}" class="btn btn-sm mt-2 strong-btn">돌아가기</a>
+    <a href="{% url 'main:fridge-add' %}" class="btn btn-sm mt-2 strong-btn">{{ previous_btn }}</a>
+    {% endif %}
 </form>
 {% endblock %}

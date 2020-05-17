@@ -40,9 +40,11 @@ def add_ingredient(request, pk):
     if request.method == 'POST':
         if MyStoredIngredient.objects.filter(user=request.user, ingredient=ingredient):
             error_msg = '이미 추가되어 있는 재료입니다.'
+            previous_btn = '돌아가기'
             context = {
                 'ingredient': ingredient,
                 'error_msg': error_msg,
+                'previous_btn': previous_btn,
             }
             return render(request, 'main/fridge/add_ingredient.html', context)
 
@@ -56,6 +58,12 @@ def add_ingredient(request, pk):
             'ingredient': ingredient,
         }
         return render(request, 'main/fridge/add_ingredient.html', context)
+
+
+def delete_ingredient(request, pk):
+    my_stored_ingredient = MyStoredIngredient.objects.get(pk=pk)
+    my_stored_ingredient.delete()
+    return redirect('main:fridge')
 
 
 def add_vegetable(request):
