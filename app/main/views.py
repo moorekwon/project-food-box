@@ -1,6 +1,20 @@
 from django.shortcuts import render, redirect
 
+from config.settings import SECRETS
 from main.models import Ingredient, MyStoredIngredient
+
+
+# sentry debug test
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
+
+# sentry CSP test web middleware
+def middleware(request, response):
+    response['Content-Security-Policy-Report-Only'] = \
+        "default-src 'self'; " \
+        f"report-uri {SECRETS['SENTRY_REPORT_URI']}"
+    return response
 
 
 def main(request):

@@ -13,6 +13,7 @@ notebook = "^6.0.3"
 pillow = "^7.1.2"
 django-storages = "^1.9.1"
 boto3 = "^1.13.10"
+sentry_sdk = "^0.14.4"
 
 [tool.poetry.dev-dependencies]
 

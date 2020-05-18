@@ -113,6 +113,9 @@ AWS_STORAGE_BUCKET_NAME = SECRETS['AWS_STORAGE_BUCKET_NAME']
 AWS_AUTO_CREATE_BUCKET = True
 AWS_S3_REGION_NAME = 'ap-northeast-2'
 
+# to resolve <UserWarning: The default behavior of S3Boto3Storage is insecure and will change in django-storages 1.10. By default files and new buckets are saved with an ACL of 'public-read' (globally publicly readable). Version 1.10 will default to using the bucket's ACL. To opt into the new behavior set AWS_DEFAULT_ACL = None, otherwise to silence this warning explicitly set AWS_DEFAULT_ACL.>
+AWS_DEFAULT_ACL = None
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
