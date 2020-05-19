@@ -34,39 +34,32 @@
             <a href="{% url 'main:add-others' %}" class="list-group-item list-group-item-action bg-light">기타</a>
         </div>
     </div>
-    <!-- /#sidebar-wrapper -->
-    <div class="my-2">
-        <ul class="row list-unstyled m-0">
-            {% for ingredient in ingredients %}
-            <a href="{% url 'main:add-ingredient' pk=ingredient.pk %}" style="color: rgba(0, 0, 0, 0.9);">
-                <li class="col">
-                    <svg class="bi bi-check-box" width="1.6em" height="1.6em" viewBox="0 0 20 20" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M17.354 4.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L10 11.293l6.646-6.647a.5.5 0 01.708 0z"
-                              clip-rule="evenodd"></path>
-                        <path fill-rule="evenodd"
-                              d="M3.5 15A1.5 1.5 0 005 16.5h10a1.5 1.5 0 001.5-1.5v-5a.5.5 0 00-1 0v5a.5.5 0 01-.5.5H5a.5.5 0 01-.5-.5V5a.5.5 0 01.5-.5h8a.5.5 0 000-1H5A1.5 1.5 0 003.5 5v10z"
-                              clip-rule="evenodd"></path>
-                    </svg>
-                    <div class="bg-light text-center rounded">
-                        <img src="{{ ingredient.image.url }}" alt="" class="bi bi-alarm-fill" width="100em"
-                             height="100em">
-                    </div>
 
-                    <div class="text-muted text-center">
-                        <div>
-                            <span>{{ ingredient.name }}</span>
+    <div class="container">
+        <div class="mt-5">
+            <ul class="row text-center text-lg-left list-unstyled m-0">
+                {% for ingredient in ingredients %}
+                <a href="{% url 'main:add-ingredient' pk=ingredient.pk %}">
+                    <li class="col-xs-3 col-xs-4 mx-3">
+
+                        <div class="d-block">
+                            <img class="img-fluid img-thumbnail" src="{{ ingredient.image.url }}" alt="" width="100em"
+                                 height="100em">
                         </div>
-                    </div>
-                </li>
-            </a>
-            {% endfor %}
-        </ul>
-    </div>
 
-    {% block content %}
-    {% endblock %}
-</div>
+                        <div class="text-muted text-center">
+                            <div>
+                                <span>{{ ingredient.name }}</span>
+                            </div>
+                        </div>
+                    </li>
+                </a>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 </html>
