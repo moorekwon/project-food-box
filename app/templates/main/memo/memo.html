@@ -5,8 +5,22 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1 class="mt-4">장 볼 음식 메모</h1>
-    <p>냉장고 관리 페이지와 비슷하게 재료 추가하여 저장하는 형태</p>
+{% if user.is_authenticated %}
+<a href="{% url 'main:fridge-add' %}" class="w3-button w3-circle">+</a>
+
+<div class="container my-5 py-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-8 col-lg-7">
+            <p class="font-weight-medium text-center text-xs text-white text-muted animate"
+               data-toggle="animation" data-animation="fadeUp" data-animation-order="0" data-animation-trigger="load">
+                안녕하세요 hjk@hjk.com님!
+            </p>
+            <p class="font-weight-medium text-center text-xs text-white text-muted animate"
+               data-toggle="animation" data-animation="fadeUp" data-animation-order="0" data-animation-trigger="load">
+                장 볼 음식 재료들을 메모하여 냉장고에 추가해 보세요!
+            </p>
+        </div>
+    </div>
 </div>
+{% endif %}
 {% endblock %}

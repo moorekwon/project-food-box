@@ -14,7 +14,7 @@ sentry_sdk.init(
     integrations=[DjangoIntegration()],
     send_default_pii=True,
     max_breadcrumbs=50,
-    debug=True,
+    debug=False,
 )
 
 # Database

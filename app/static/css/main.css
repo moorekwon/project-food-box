@@ -6,6 +6,43 @@ body {
     color: #e83e8c;
 }
 
+.w3-button {
+    border: none;
+    display: inline-block;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: #f8f9fa;
+    background-color: #343a40;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    font-size: 30px;
+    position: fixed;
+    right: 6%;
+    bottom: 10%;
+    width: 60px;
+    z-index: 1;
+}
+
+.w3-button:hover {
+    color: #000!important;
+    background-color: #ccc!important;
+}
+
+.w3-circle {
+    border-radius: 50%;
+}
+
 header {
   position: relative;
   background-color: black;

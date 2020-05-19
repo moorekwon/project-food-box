@@ -10,11 +10,12 @@ def trigger_error(request):
 
 
 # sentry CSP test web middleware
-def middleware(request, response):
-    response['Content-Security-Policy-Report-Only'] = \
-        "default-src 'self'; " \
-        f"report-uri {SECRETS['SENTRY_REPORT_URI']}"
-    return response
+# type error (missing 1 required positional argument: 'response')
+# def middleware(request, response):
+#     response['Content-Security-Policy-Report-Only'] = \
+#         "default-src 'self'; " \
+#         f"report-uri {SECRETS['SENTRY_REPORT_URI']}"
+#     return response
 
 
 def main(request):
@@ -81,31 +82,31 @@ def delete_ingredient(request, pk):
 
 
 def add_vegetable(request):
-    return render(request, 'main/fridge/vegetables.html')
+    return render(request, 'main/fridge/type/vegetables.html')
 
 
 def add_meat(request):
-    return render(request, 'main/fridge/meat.html')
+    return render(request, 'main/fridge/type/meat.html')
 
 
 def add_marine(request):
-    return render(request, 'main/fridge/marine.html')
+    return render(request, 'main/fridge/type/marine.html')
 
 
 def add_grain(request):
-    return render(request, 'main/fridge/grain.html')
+    return render(request, 'main/fridge/type/grain.html')
 
 
 def add_sauce(request):
-    return render(request, 'main/fridge/sauce.html')
+    return render(request, 'main/fridge/type/sauce.html')
 
 
 def add_milk(request):
-    return render(request, 'main/fridge/milk.html')
+    return render(request, 'main/fridge/type/milk.html')
 
 
 def add_others(request):
-    return render(request, 'main/fridge/others.html')
+    return render(request, 'main/fridge/type/others.html')
 
 
 def memo(request):

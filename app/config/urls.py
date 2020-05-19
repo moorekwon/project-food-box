@@ -21,7 +21,7 @@ from django.urls import path, include
 from main.views import trigger_error
 
 urlpatterns = [
-    path('-debug/', trigger_error),
+    path('debug/', trigger_error),
 
     path('admin/', admin.site.urls),
     path('main/', include('main.urls')),
