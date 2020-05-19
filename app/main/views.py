@@ -55,7 +55,7 @@ def add_ingredient(request, pk):
     if request.method == 'POST':
         if MyStoredIngredient.objects.filter(user=request.user, ingredient=ingredient):
             error_msg = '이미 추가되어 있는 재료입니다.'
-            previous_btn = '돌아가기'
+            previous_btn = '이전으로'
             context = {
                 'ingredient': ingredient,
                 'error_msg': error_msg,
