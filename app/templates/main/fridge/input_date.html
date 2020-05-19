@@ -1,7 +1,7 @@
-{% extends 'main/fridge/fridge_add.html' %}
+{% extends 'main/add_ingredient.html' %}
 
 {% block content %}
-<form action="{% url 'main:add-ingredient' pk=ingredient.pk %}" method="post" class="m-5">
+<form action="{% url 'main:input-date' pk=ingredient.pk %}" method="post" class="m-5">
     {% csrf_token %}
     <div class="form-group row mx-0">
         <label for="ingredientName" class="col-sm-2 col-form-label p-0" style="line-height: 38px;">재료</label>
@@ -20,7 +20,7 @@
 
     {% if previous_btn %}
     <p class="mt-4 strong">{{ error_msg }}</p>
-    <a href="{% url 'main:fridge-add' %}" class="btn btn-sm mt-2 strong-btn">{{ previous_btn }}</a>
+    <a href="{% url 'main:add-ingredient' %}" class="btn btn-sm mt-2 strong-btn">{{ previous_btn }}</a>
     {% endif %}
 </form>
 {% endblock %}

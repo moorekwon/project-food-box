@@ -33,7 +33,7 @@ def fridge(request):
     return render(request, 'main/fridge/fridge.html')
 
 
-def fridge_add(request):
+def add_ingredient(request):
     ingredients = Ingredient.objects.all().order_by('name')
 
     search_text = request.GET.get('search_text')
@@ -46,10 +46,10 @@ def fridge_add(request):
     context = {
         'ingredients': ingredients,
     }
-    return render(request, 'main/fridge/fridge_add.html', context)
+    return render(request, 'main/add_ingredient.html', context)
 
 
-def add_ingredient(request, pk):
+def input_date(request, pk):
     ingredient = Ingredient.objects.get(pk=pk)
 
     if request.method == 'POST':
@@ -61,7 +61,7 @@ def add_ingredient(request, pk):
                 'error_msg': error_msg,
                 'previous_btn': previous_btn,
             }
-            return render(request, 'main/fridge/add_ingredient.html', context)
+            return render(request, 'main/fridge/input_date.html', context)
 
         else:
             date = request.POST['input_date']
@@ -72,7 +72,7 @@ def add_ingredient(request, pk):
         context = {
             'ingredient': ingredient,
         }
-        return render(request, 'main/fridge/add_ingredient.html', context)
+        return render(request, 'main/fridge/input_date.html', context)
 
 
 def delete_ingredient(request, pk):

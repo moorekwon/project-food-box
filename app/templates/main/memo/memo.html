@@ -1,12 +1,12 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-<title>Foodbock fridge page</title>
+<title>Foodbox memo page</title>
 {% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
-<a href="{% url 'main:fridge-add' %}" class="w3-button w3-circle">+</a>
+<a href="{% url 'main:add-ingredient' %}" class="w3-button w3-circle">+</a>
 
 <div class="container my-5 py-5">
     <div class="row justify-content-center align-items-center">

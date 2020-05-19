@@ -11,14 +11,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet">
-    <title>Foodbox fridge add page</title>
+    <title>Foodbox add ingredient page</title>
 </head>
 
 <body>
-<form action="{% url 'main:fridge-add' %}" method="get" class="form-inline mt-5">
+<form action="{% url 'main:add-ingredient' %}" method="get" class="form-inline mt-5">
     <input name="search_text" type="text" class="form-control mr-sm-2 mb-3">
     <button type="submit" class="btn btn-sm btn-outline-dark mb-3">재료 검색</button>
-    <a href="{% url 'main:fridge-add' %}" class="btn btn-sm btn-outline-dark ml-2 mb-3">전체 보기</a>
+    <a href="{% url 'main:add-ingredient' %}" class="btn btn-sm btn-outline-dark ml-2 mb-3">전체 보기</a>
 </form>
 <div class="d-flex" id="wrapper">
 
@@ -39,14 +39,11 @@
         <div class="mt-5">
             <ul class="row text-center text-lg-left list-unstyled m-0">
                 {% for ingredient in ingredients %}
-                <a href="{% url 'main:add-ingredient' pk=ingredient.pk %}">
+                <a href="{% url 'main:input-date' pk=ingredient.pk %}">
                     <li class="col-xs-3 col-xs-4 mx-3">
-
                         <div class="d-block">
-                            <img class="img-fluid img-thumbnail" src="{{ ingredient.image.url }}" alt="" width="100em"
-                                 height="100em">
+                            <img class="img-fluid img-thumbnail" src="{{ ingredient.image.url }}" alt="" style="width: 90px; height: 60px;">
                         </div>
-
                         <div class="text-muted text-center">
                             <div>
                                 <span>{{ ingredient.name }}</span>
@@ -57,8 +54,6 @@
                 {% endfor %}
             </ul>
         </div>
-
-
 
         {% block content %}
         {% endblock %}

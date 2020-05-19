@@ -7,8 +7,8 @@ app_name = 'main'
 urlpatterns = [
     path('', views.main, name='main'),
     path('fridge/', views.fridge, name='fridge'),
-    path('fridge/add/', views.fridge_add, name='fridge-add'),
-    path('fridge/add/<int:pk>/', views.add_ingredient, name='add-ingredient'),
+    path('fridge/add/', views.add_ingredient, name='add-ingredient'),
+    path('fridge/add/<int:pk>/', views.input_date, name='input-date'),
 
     path('fridge/add/vegetables/', views.add_vegetable, name='add-vegetable'),
     path('fridge/add/meat/', views.add_meat, name='add-meat'),

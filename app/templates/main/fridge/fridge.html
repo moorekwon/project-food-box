@@ -32,37 +32,12 @@
     .red {
         background-color: #f2552c;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </style>
 {% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
-<a href="{% url 'main:fridge-add' %}" class="w3-button w3-circle">+</a>
+<a href="{% url 'main:add-ingredient' %}" class="w3-button w3-circle">+</a>
 
 <p class="lead mt-4" style="text-align: center; font-size: 0.9rem; line-height: 2;">
     칼로리 100g 기준<br>
@@ -102,7 +77,7 @@
 
                 <div class="d-block">
                     <img class="img-fluid img-thumbnail" src="{{ my_stored_ingredient.ingredient.image.url }}"
-                         alt="" width="100em" height="100em">
+                         alt="" style="width: 100px; height: 70px;">
                 </div>
 
                 <div class="text-muted text-center">
@@ -155,7 +130,7 @@
 
                 <div class="d-block">
                     <img class="img-fluid img-thumbnail" src="{{ my_stored_ingredient.ingredient.image.url }}"
-                         alt="" width="100em" height="100em">
+                         alt="" style="width: 100px; height: 70px;">
                 </div>
 
                 <div class="text-muted text-center">
@@ -208,7 +183,7 @@
 
                 <div class="d-block">
                     <img class="img-fluid img-thumbnail" src="{{ my_stored_ingredient.ingredient.image.url }}"
-                         alt="" width="100em" height="100em">
+                         alt="" style="width: 100px; height: 70px;">
                 </div>
 
                 <div class="text-muted text-center">
