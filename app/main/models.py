@@ -7,20 +7,30 @@ User = get_user_model()
 
 
 class Ingredient(models.Model):
-    WHERE = (
+    FRIDGER = (
         ('F', 'Freezer'),
         ('R', 'Refrigerator'),
         ('T', 'Room Temperature')
+    )
+    TYPE = (
+        ('vegetables', '채소/과일'),
+        ('meat', '육류'),
+        ('marine', '수산물'),
+        ('grain', '곡물/견과류'),
+        ('sauce', '양념/소스'),
+        ('milk', '가공/유제품'),
+        ('others', '기타'),
     )
 
     name = models.CharField(max_length=50)
     keeping_days = models.PositiveIntegerField()
     kcalories = models.PositiveIntegerField()
     image = models.ImageField(upload_to='images/ingredients/')
-    fridger = models.CharField(max_length=2, choices=WHERE)
+    fridger = models.CharField(max_length=2, choices=FRIDGER, null=False)
+    type = models.CharField(choices=TYPE, max_length=10, null=False)
 
     def __str__(self):
-        return f'{self.name}'
+        return self.name
 
 
 class MyStoredIngredient(models.Model):
@@ -55,3 +65,11 @@ class MyStoredIngredient(models.Model):
         if keeping_days - left_days > keeping_days:
             return -left_days
         return left_days
+
+
+class MyMemoIngredient(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.ingredient

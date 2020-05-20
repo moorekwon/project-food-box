@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from config.settings import SECRETS
-from main.models import Ingredient, MyStoredIngredient
+from main.models import Ingredient, MyStoredIngredient, MyMemoIngredient
 
 
 # sentry debug test
@@ -25,9 +25,21 @@ def main(request):
 def fridge(request):
     if request.user.is_authenticated:
         my_stored_ingredients = MyStoredIngredient.objects.filter(user=request.user)
+        my_stored_ingredients_f, my_stored_ingredients_r, my_stored_ingredients_t = list(), list(), list()
+
+        for my_stored_ingredient in my_stored_ingredients:
+            if my_stored_ingredient.ingredient.fridger == 'F':
+                my_stored_ingredients_f.append(my_stored_ingredient)
+            elif my_stored_ingredient.ingredient.fridger == 'R':
+                my_stored_ingredients_r.append(my_stored_ingredient)
+            else:
+                my_stored_ingredients_t.append(my_stored_ingredient)
 
         context = {
             'my_stored_ingredients': my_stored_ingredients,
+            'my_stored_ingredients_f': my_stored_ingredients_f,
+            'my_stored_ingredients_r': my_stored_ingredients_r,
+            'my_stored_ingredients_t': my_stored_ingredients_t,
         }
         return render(request, 'main/fridge/fridge.html', context)
     return render(request, 'main/fridge/fridge.html')
@@ -110,6 +122,13 @@ def add_others(request):
 
 
 def memo(request):
+    if request.user.is_authenticated:
+        my_memo_ingredients = MyMemoIngredient.objects.filter(user=request.user)
+
+        context = {
+            'my_memo_ingredients': my_memo_ingredients,
+        }
+        return render(request, 'main/memo/memo.html', context)
     return render(request, 'main/memo/memo.html')
 
 

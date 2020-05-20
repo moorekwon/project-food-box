@@ -8,6 +8,7 @@
 {% if user.is_authenticated %}
 <a href="{% url 'main:add-ingredient' %}" class="w3-button w3-circle">+</a>
 
+{% if not my_memo_ingredients %}
 <div class="container my-5 py-5">
     <div class="row justify-content-center align-items-center">
         <div class="col-md-8 col-lg-7">
@@ -22,5 +23,63 @@
         </div>
     </div>
 </div>
+
+{% else %}
+<div class="container">
+
+    <div class="mt-5">
+        <h1 class="font-weight-light text-lg-left mt-4 mb-0">채소/과일</h1>
+        <hr class="my-3">
+        <ul class="row text-center text-lg-left list-unstyled m-0">
+            {% for my_memo_ingredient in my_memo_ingredients %}
+            {% if my_stored_ingredient.ingredient.fridger == 'F' %}
+            <li class="col-xs-3 col-xs-4 mr-4">
+                <a href="{% url 'main:delete-ingredient' pk=my_stored_ingredient.pk %}" class="close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+
+                <div class="d-block">
+                    <img class="img-fluid img-thumbnail" src="{{ my_stored_ingredient.ingredient.image.url }}"
+                         alt="" style="width: 100px; height: 70px;">
+                </div>
+
+                <div class="text-muted text-center">
+                    <div>
+                        <span>{{ my_stored_ingredient.ingredient.name }}</span>
+                    </div>
+
+                    <div class="border-bottom border-gray">
+                        <p class="mb-0 small">
+                            {% if my_stored_ingredient.freshness == '신선도 위험' %}
+                            <strong class="text-gray-dark"> {{ my_stored_ingredient.freshness }} <span
+                                    class="w3-container red"></span></strong><br>
+                            <span class="text-danger">({{ my_stored_ingredient.left_days }}일 지남)</span>
+                            {% elif my_stored_ingredient.freshness == '신선도 높음' %}
+                            <strong class="text-gray-dark"> {{ my_stored_ingredient.freshness }} <span
+                                    class="w3-container green"></span></strong><br>
+                            <span>({{ my_stored_ingredient.left_days }}일 남음)</span>
+                            {% elif my_stored_ingredient.freshness == '신선도 보통' %}
+                            <strong class="text-gray-dark"> {{ my_stored_ingredient.freshness }} <span
+                                    class="w3-container yellow"></span></strong><br>
+                            <span>({{ my_stored_ingredient.left_days }}일 남음)</span>
+                            {% else %}
+                            <strong class="text-gray-dark"> {{ my_stored_ingredient.freshness }} <span
+                                    class="w3-container red"></span></strong><br>
+                            <span>({{ my_stored_ingredient.left_days }}일 남음)</span>
+                            {% endif %}
+                        </p>
+                        <p class="mb-0 small">
+                            <strong class="text-gray-dark">{{ my_stored_ingredient.ingredient.kcalories }} kcal</strong>
+                        </p>
+                    </div>
+
+                </div>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
 {% endif %}
 {% endblock %}
