@@ -6,7 +6,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<a href="{% url 'main:add-ingredient' %}" class="w3-button w3-circle">+</a>
+<a href="{% url 'main:add-memo' %}" class="w3-button w3-circle">+</a>
 
 {% if not my_memo_ingredients %}
 <div class="container my-5 py-5">
@@ -25,60 +25,215 @@
 </div>
 
 {% else %}
+<div class="container-fluid my-2" style="height: 24px;">
+    <div class="row" style="height: 24px;">
+        <div class="col-sm-1" style="height: 24px; line-height: 24px; font-size: 20px; text-align: right; color: #e83e8c;">
+            {{ my_memo_ingredients_count }}
+        </div>
+        <div class="col-sm-8">
+            <div class="progress" style="height: 24px;">
+                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%"
+                     aria-valuenow="75"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+        <a href="" class="col-sm-3">냉장고 넣기
+            <img style="width: 24px; height: 24px;" src="https://img.icons8.com/ios/50/000000/fridge.png"/>
+        </a>
+    </div>
+</div>
+
+
 <div class="container">
 
+    {% if my_memo_ingredients_ve %}
     <div class="mt-5">
-        <h1 class="font-weight-light text-lg-left mt-4 mb-0">채소/과일</h1>
+        <h3 class="font-weight-light mt-4 mb-0">채소/과일</h3>
         <hr class="my-3">
         <ul class="row text-center text-lg-left list-unstyled m-0">
-            {% for my_memo_ingredient in my_memo_ingredients %}
-            {% if my_stored_ingredient.ingredient.fridger == 'F' %}
+            {% for my_memo_ingredient_ve in my_memo_ingredients_ve %}
             <li class="col-xs-3 col-xs-4 mr-4">
-                <a href="{% url 'main:delete-ingredient' pk=my_stored_ingredient.pk %}" class="close">
-                    <span aria-hidden="true">&times;</span>
-                </a>
-
-                <div class="d-block">
-                    <img class="img-fluid img-thumbnail" src="{{ my_stored_ingredient.ingredient.image.url }}"
-                         alt="" style="width: 100px; height: 70px;">
-                </div>
-
-                <div class="text-muted text-center">
-                    <div>
-                        <span>{{ my_stored_ingredient.ingredient.name }}</span>
-                    </div>
-
-                    <div class="border-bottom border-gray">
-                        <p class="mb-0 small">
-                            {% if my_stored_ingredient.freshness == '신선도 위험' %}
-                            <strong class="text-gray-dark"> {{ my_stored_ingredient.freshness }} <span
-                                    class="w3-container red"></span></strong><br>
-                            <span class="text-danger">({{ my_stored_ingredient.left_days }}일 지남)</span>
-                            {% elif my_stored_ingredient.freshness == '신선도 높음' %}
-                            <strong class="text-gray-dark"> {{ my_stored_ingredient.freshness }} <span
-                                    class="w3-container green"></span></strong><br>
-                            <span>({{ my_stored_ingredient.left_days }}일 남음)</span>
-                            {% elif my_stored_ingredient.freshness == '신선도 보통' %}
-                            <strong class="text-gray-dark"> {{ my_stored_ingredient.freshness }} <span
-                                    class="w3-container yellow"></span></strong><br>
-                            <span>({{ my_stored_ingredient.left_days }}일 남음)</span>
-                            {% else %}
-                            <strong class="text-gray-dark"> {{ my_stored_ingredient.freshness }} <span
-                                    class="w3-container red"></span></strong><br>
-                            <span>({{ my_stored_ingredient.left_days }}일 남음)</span>
-                            {% endif %}
-                        </p>
-                        <p class="mb-0 small">
-                            <strong class="text-gray-dark">{{ my_stored_ingredient.ingredient.kcalories }} kcal</strong>
-                        </p>
-                    </div>
-
+                <div class="media text-muted pt-3">
+                    <a href="" style="color: #212529; font-size: 1.4rem !important;">
+                        <svg class="bi bi-check-circle" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z"
+                                  clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                  d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        {{ my_memo_ingredient_ve.ingredient.name }}
+                    </a>
                 </div>
             </li>
-            {% endif %}
             {% endfor %}
         </ul>
     </div>
+    {% endif %}
+
+    {% if my_memo_ingredients_me %}
+    <div class="mt-5">
+        <h3 class="font-weight-light mt-4 mb-0">육류</h3>
+        <hr class="my-3">
+        <ul class="row text-center text-lg-left list-unstyled m-0">
+            {% for my_memo_ingredient_me in my_memo_ingredients_me %}
+            <li class="col-xs-3 col-xs-4 mr-4">
+                <div class="media text-muted pt-3">
+                    <a href="" style="color: #212529; font-size: 1.4rem !important;">
+                        <svg class="bi bi-check-circle" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z"
+                                  clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                  d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        {{ my_memo_ingredient_me.ingredient.name }}
+                    </a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if my_memo_ingredients_ma %}
+    <div class="mt-5">
+        <h3 class="font-weight-light mt-4 mb-0">수산물</h3>
+        <hr class="my-3">
+        <ul class="row text-center text-lg-left list-unstyled m-0">
+            {% for my_memo_ingredient_ma in my_memo_ingredients_ma %}
+            <li class="col-xs-3 col-xs-4 mr-4">
+                <div class="media text-muted pt-3">
+                    <a href="" style="color: #212529; font-size: 1.4rem !important;">
+                        <svg class="bi bi-check-circle" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z"
+                                  clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                  d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        {{ my_memo_ingredient_ma.ingredient.name }}
+                    </a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if my_memo_ingredients_gr %}
+    <div class="mt-5">
+        <h3 class="font-weight-light mt-4 mb-0">곡물/견과류</h3>
+        <hr class="my-3">
+        <ul class="row text-center text-lg-left list-unstyled m-0">
+            {% for my_memo_ingredient_gr in my_memo_ingredients_gr %}
+            <li class="col-xs-3 col-xs-4 mr-4">
+                <div class="media text-muted pt-3">
+                    <a href="" style="color: #212529; font-size: 1.4rem !important;">
+                        <svg class="bi bi-check-circle" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z"
+                                  clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                  d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        {{ my_memo_ingredient_gr.ingredient.name }}
+                    </a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if my_memo_ingredients_sa %}
+    <div class="mt-5">
+        <h3 class="font-weight-light mt-4 mb-0">양념/소스</h3>
+        <hr class="my-3">
+        <ul class="row text-center text-lg-left list-unstyled m-0">
+            {% for my_memo_ingredient_sa in my_memo_ingredients_sa %}
+            <li class="col-xs-3 col-xs-4 mr-4">
+                <div class="media text-muted pt-3">
+                    <a href="" style="color: #212529; font-size: 1.4rem !important;">
+                        <svg class="bi bi-check-circle" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z"
+                                  clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                  d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        {{ my_memo_ingredient_sa.ingredient.name }}
+                    </a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if my_memo_ingredients_mi %}
+    <div class="mt-5">
+        <h3 class="font-weight-light mt-4 mb-0">가공/유제품</h3>
+        <hr class="my-3">
+        <ul class="row text-center text-lg-left list-unstyled m-0">
+            {% for my_memo_ingredient_mi in my_memo_ingredients_mi %}
+            <li class="col-xs-3 col-xs-4 mr-4">
+                <div class="media text-muted pt-3">
+                    <a href="" style="color: #212529; font-size: 1.4rem !important;">
+                        <svg class="bi bi-check-circle" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z"
+                                  clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                  d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        {{ my_memo_ingredient_mi.ingredient.name }}
+                    </a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if my_memo_ingredients_ot %}
+    <div class="mt-5">
+        <h3 class="font-weight-light mt-4 mb-0">기타</h3>
+        <hr class="my-3">
+        <ul class="row text-center text-lg-left list-unstyled m-0">
+            {% for my_memo_ingredient_ot in my_memo_ingredients_ot %}
+            <li class="col-xs-3 col-xs-4 mr-4">
+                <div class="media text-muted pt-3">
+                    <a href="" style="color: #212529; font-size: 1.4rem !important;">
+                        <svg class="bi bi-check-circle" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z"
+                                  clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                  d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        {{ my_memo_ingredient_ot.ingredient.name }}
+                    </a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
 </div>
 {% endif %}
 {% endif %}

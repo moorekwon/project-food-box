@@ -69,7 +69,5 @@ class MyStoredIngredient(models.Model):
 
 class MyMemoIngredient(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, blank=True, null=True)
 
-    def __str__(self):
-        return self.ingredient

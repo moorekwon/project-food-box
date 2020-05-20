@@ -7,7 +7,7 @@ app_name = 'main'
 urlpatterns = [
     path('', views.main, name='main'),
     path('fridge/', views.fridge, name='fridge'),
-    path('fridge/add/', views.add_ingredient, name='add-ingredient'),
+    path('fridge/add/', views.add_fridge, name='add-fridge'),
     path('fridge/add/<int:pk>/', views.input_date, name='input-date'),
 
     path('fridge/add/vegetables/', views.add_vegetable, name='add-vegetable'),
@@ -21,6 +21,7 @@ urlpatterns = [
     path('fridge/delete/<int:pk>/', views.delete_ingredient, name='delete-ingredient'),
 
     path('memo/', views.memo, name='memo'),
+    path('memo/add/', views.add_memo, name='add-memo'),
     path('blog/', views.blog, name='blog'),
     path('recommendation/', views.recommendation, name='recommendation'),
 ]

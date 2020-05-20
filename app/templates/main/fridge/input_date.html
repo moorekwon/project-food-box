@@ -1,4 +1,4 @@
-{% extends 'main/add_ingredient.html' %}
+{% extends 'main/fridge/add_fridge.html' %}
 
 {% block content %}
 <form action="{% url 'main:input-date' pk=ingredient.pk %}" method="post" class="m-5">
@@ -20,7 +20,7 @@
 
     {% if previous_btn %}
     <p class="mt-4 strong">{{ error_msg }}</p>
-    <a href="{% url 'main:add-ingredient' %}" class="btn btn-sm mt-2 strong-btn">{{ previous_btn }}</a>
+    <a href="{% url 'main:add-fridge' %}" class="btn btn-sm mt-2 strong-btn">{{ previous_btn }}</a>
     {% endif %}
 </form>
 {% endblock %}

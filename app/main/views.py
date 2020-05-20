@@ -45,7 +45,7 @@ def fridge(request):
     return render(request, 'main/fridge/fridge.html')
 
 
-def add_ingredient(request):
+def add_fridge(request):
     ingredients = Ingredient.objects.all().order_by('name')
 
     search_text = request.GET.get('search_text')
@@ -58,7 +58,7 @@ def add_ingredient(request):
     context = {
         'ingredients': ingredients,
     }
-    return render(request, 'main/add_ingredient.html', context)
+    return render(request, 'main/fridge/add_fridge.html', context)
 
 
 def input_date(request, pk):
@@ -124,12 +124,42 @@ def add_others(request):
 def memo(request):
     if request.user.is_authenticated:
         my_memo_ingredients = MyMemoIngredient.objects.filter(user=request.user)
+        my_memo_ingredients_count = len(my_memo_ingredients)
+
+        my_memo_ingredients_ve, my_memo_ingredients_me, my_memo_ingredients_ma, my_memo_ingredients_gr, my_memo_ingredients_sa, my_memo_ingredients_mi, my_memo_ingredients_ot = list(), list(), list(), list(), list(), list(), list()
+
+        for my_memo_ingredient in my_memo_ingredients:
+            if my_memo_ingredient.ingredient.type == 'vegetables':
+                my_memo_ingredients_ve.append(my_memo_ingredient)
+            elif my_memo_ingredient.ingredient.type == 'meat':
+                my_memo_ingredients_me.append(my_memo_ingredient)
+            elif my_memo_ingredient.ingredient.type == 'marine':
+                my_memo_ingredients_ma.append(my_memo_ingredient)
+            elif my_memo_ingredient.ingredient.type == 'grain':
+                my_memo_ingredients_gr.append(my_memo_ingredient)
+            elif my_memo_ingredient.ingredient.type == 'sauce':
+                my_memo_ingredients_sa.append(my_memo_ingredient)
+            elif my_memo_ingredient.ingredient.type == 'milk':
+                my_memo_ingredients_mi.append(my_memo_ingredient)
+            else:
+                my_memo_ingredients_ot.append(my_memo_ingredient)
 
         context = {
             'my_memo_ingredients': my_memo_ingredients,
+            'my_memo_ingredients_ve': my_memo_ingredients_ve,
+            'my_memo_ingredients_me': my_memo_ingredients_me,
+            'my_memo_ingredients_ma': my_memo_ingredients_ma,
+            'my_memo_ingredients_gr': my_memo_ingredients_gr,
+            'my_memo_ingredients_sa': my_memo_ingredients_sa,
+            'my_memo_ingredients_mi': my_memo_ingredients_mi,
+            'my_memo_ingredients_count': my_memo_ingredients_count,
         }
         return render(request, 'main/memo/memo.html', context)
     return render(request, 'main/memo/memo.html')
+
+
+def add_memo(request):
+    pass
 
 
 def blog(request):
