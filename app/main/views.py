@@ -159,7 +159,25 @@ def memo(request):
 
 
 def add_memo(request):
-    pass
+    ingredients = Ingredient.objects.all().order_by('name')
+
+    search_text = request.GET.get('search_text')
+
+    if search_text:
+        ingredients = ingredients.filter(name__contains=search_text)
+    else:
+        ingredients = ingredients
+
+    context = {
+        'ingredients': ingredients,
+    }
+    return render(request, 'main/memo/add_memo.html', context)
+
+
+def add_memo_ingredient(request, pk):
+    ingredient = Ingredient.objects.get(pk=pk)
+    MyMemoIngredient.objects.get_or_create(user=request.user, ingredient=ingredient)
+    return redirect('main:memo')
 
 
 def blog(request):

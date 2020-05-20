@@ -27,7 +27,8 @@
 {% else %}
 <div class="container-fluid my-2" style="height: 24px;">
     <div class="row" style="height: 24px;">
-        <div class="col-sm-1" style="height: 24px; line-height: 24px; font-size: 20px; text-align: right; color: #e83e8c;">
+        <div class="col-sm-1"
+             style="height: 24px; line-height: 24px; font-size: 20px; text-align: right; color: #e83e8c;">
             {{ my_memo_ingredients_count }}
         </div>
         <div class="col-sm-8">
@@ -54,7 +55,8 @@
             {% for my_memo_ingredient_ve in my_memo_ingredients_ve %}
             <li class="col-xs-3 col-xs-4 mr-4">
                 <div class="media text-muted pt-3">
-                    <a href="" style="color: #212529; font-size: 1.4rem !important;">
+                    <a href=""
+                       style="color: #212529; font-size: 1.4rem !important; text-decoration-line: line-through; text-decoration-color: #ffc107;">
                         <svg class="bi bi-check-circle" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"

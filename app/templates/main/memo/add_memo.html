@@ -15,10 +15,10 @@
 </head>
 
 <body>
-<form action="{% url 'main:add-fridge' %}" method="get" class="form-inline mt-5">
+<form action="{% url 'main:add-memo' %}" method="get" class="form-inline mt-5">
     <input name="search_text" type="text" class="form-control mr-sm-2 mb-3">
     <button type="submit" class="btn btn-sm btn-outline-dark mb-3">재료 검색</button>
-    <a href="{% url 'main:add-fridge' %}" class="btn btn-sm btn-outline-dark ml-2 mb-3">전체 보기</a>
+    <a href="{% url 'main:add-memo' %}" class="btn btn-sm btn-outline-dark ml-2 mb-3">전체 보기</a>
 </form>
 
 
@@ -41,7 +41,7 @@
         <div class="mt-5">
             <ul class="row text-center text-lg-left list-unstyled m-0">
                 {% for ingredient in ingredients %}
-                <a href="{% url 'main:input-date' pk=ingredient.pk %}">
+                <a href="{% url 'main:add-memo-ingredient' pk=ingredient.pk %}">
                     <li class="col-xs-3 col-xs-4 mx-3">
                         <div class="d-block">
                             <img class="img-fluid img-thumbnail" src="{{ ingredient.image.url }}" alt=""

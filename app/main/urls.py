@@ -22,6 +22,7 @@ urlpatterns = [
 
     path('memo/', views.memo, name='memo'),
     path('memo/add/', views.add_memo, name='add-memo'),
+    path('memo/add/<int:pk>', views.add_memo_ingredient, name='add-memo-ingredient'),
     path('blog/', views.blog, name='blog'),
     path('recommendation/', views.recommendation, name='recommendation'),
 ]
