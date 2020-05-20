@@ -18,11 +18,13 @@ urlpatterns = [
     path('fridge/add/milk/', views.add_milk, name='add-milk'),
     path('fridge/add/others/', views.add_others, name='add-others'),
 
-    path('fridge/delete/<int:pk>/', views.delete_ingredient, name='delete-ingredient'),
+    path('fridge/delete/<int:pk>/', views.delete_fridge_ingredient, name='delete-fridge-ingredient'),
 
     path('memo/', views.memo, name='memo'),
     path('memo/add/', views.add_memo, name='add-memo'),
-    path('memo/add/<int:pk>', views.add_memo_ingredient, name='add-memo-ingredient'),
+    path('memo/add/<int:pk>/', views.add_memo_ingredient, name='add-memo-ingredient'),
+    path('memo/delete/<int:pk>/', views.delete_memo_ingredient, name='delete-memo-ingredient'),
+
     path('blog/', views.blog, name='blog'),
     path('recommendation/', views.recommendation, name='recommendation'),
 ]

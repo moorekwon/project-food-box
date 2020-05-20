@@ -43,6 +43,10 @@ body {
     border-radius: 50%;
 }
 
+svg {
+    margin: 8px;
+}
+
 header {
   position: relative;
   background-color: black;

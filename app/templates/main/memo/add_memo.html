@@ -22,42 +22,39 @@
 </form>
 
 
-<div class="d-flex" id="wrapper">
+<div class="d-flex mt-4" id="wrapper">
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="list-group list-group-flush">
-            <a href="{% url 'main:add-vegetable' %}" class="list-group-item list-group-item-action bg-light">채소/과일</a>
-            <a href="{% url 'main:add-meat' %}" class="list-group-item list-group-item-action bg-light">육류</a>
-            <a href="{% url 'main:add-marine' %}" class="list-group-item list-group-item-action bg-light">수산물</a>
-            <a href="{% url 'main:add-grain' %}" class="list-group-item list-group-item-action bg-light">곡물/견과류</a>
-            <a href="{% url 'main:add-sauce' %}" class="list-group-item list-group-item-action bg-light">양념/소스</a>
-            <a href="{% url 'main:add-milk' %}" class="list-group-item list-group-item-action bg-light">가공/유제품</a>
-            <a href="{% url 'main:add-others' %}" class="list-group-item list-group-item-action bg-light">기타</a>
+            <a href="" class="list-group-item list-group-item-action bg-light">채소/과일</a>
+            <a href="" class="list-group-item list-group-item-action bg-light">육류</a>
+            <a href="" class="list-group-item list-group-item-action bg-light">수산물</a>
+            <a href="" class="list-group-item list-group-item-action bg-light">곡물/견과류</a>
+            <a href="" class="list-group-item list-group-item-action bg-light">양념/소스</a>
+            <a href="" class="list-group-item list-group-item-action bg-light">가공/유제품</a>
+            <a href="" class="list-group-item list-group-item-action bg-light">기타</a>
         </div>
     </div>
 
     <div class="container">
-        <div class="mt-5">
-            <ul class="row text-center text-lg-left list-unstyled m-0">
-                {% for ingredient in ingredients %}
-                <a href="{% url 'main:add-memo-ingredient' pk=ingredient.pk %}">
-                    <li class="col-xs-3 col-xs-4 mx-3">
-                        <div class="d-block">
-                            <img class="img-fluid img-thumbnail" src="{{ ingredient.image.url }}" alt=""
-                                 style="width: 90px; height: 60px;">
+        <ul class="row text-center text-lg-left list-unstyled m-0">
+            {% for ingredient in ingredients %}
+            <a href="{% url 'main:add-memo-ingredient' pk=ingredient.pk %}">
+                <li class="col-xs-3 col-xs-4 mx-3">
+                    <div class="d-block">
+                        <img class="img-fluid img-thumbnail" src="{{ ingredient.image.url }}" alt=""
+                             style="width: 90px; height: 60px;">
+                    </div>
+                    <div class="text-muted text-center">
+                        <div>
+                            <span>{{ ingredient.name }}</span>
                         </div>
-                        <div class="text-muted text-center">
-                            <div>
-                                <span>{{ ingredient.name }}</span>
-                            </div>
-                        </div>
-                    </li>
-                </a>
-                {% endfor %}
-            </ul>
-        </div>
-
+                    </div>
+                </li>
+            </a>
+            {% endfor %}
+        </ul>
         {% block content %}
         {% endblock %}
     </div>

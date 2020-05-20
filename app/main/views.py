@@ -87,7 +87,7 @@ def input_date(request, pk):
         return render(request, 'main/fridge/input_date.html', context)
 
 
-def delete_ingredient(request, pk):
+def delete_fridge_ingredient(request, pk):
     my_stored_ingredient = MyStoredIngredient.objects.get(pk=pk)
     my_stored_ingredient.delete()
     return redirect('main:fridge')
@@ -177,6 +177,12 @@ def add_memo(request):
 def add_memo_ingredient(request, pk):
     ingredient = Ingredient.objects.get(pk=pk)
     MyMemoIngredient.objects.get_or_create(user=request.user, ingredient=ingredient)
+    return redirect('main:memo')
+
+
+def delete_memo_ingredient(request, pk):
+    my_memo_ingredient = MyMemoIngredient.objects.get(pk=pk)
+    my_memo_ingredient.delete()
     return redirect('main:memo')
 
 
