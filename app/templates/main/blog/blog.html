@@ -4,6 +4,21 @@
 <title>Foodbock fridge page</title>
 {% endblock %}
 
+{% block active %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'main:fridge' %}">냉장고 관리</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'main:memo' %}">장보기 메모</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'main:recommendation' %}">추천 메뉴</a>
+</li>
+<li class="nav-item active">
+    <a class="nav-link" href="{% url 'main:blog' %}">내 블로그</a>
+</li>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <h1 class="mt-4">먹거리, 건강 관련 블로깅</h1>

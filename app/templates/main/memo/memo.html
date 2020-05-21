@@ -4,6 +4,21 @@
 <title>Foodbox memo page</title>
 {% endblock %}
 
+{% block active %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'main:fridge' %}">냉장고 관리</a>
+</li>
+<li class="nav-item active">
+    <a class="nav-link" href="{% url 'main:memo' %}">장보기 메모</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'main:recommendation' %}">추천 메뉴</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'main:blog' %}">내 블로그</a>
+</li>
+{% endblock %}
+
 {% block content %}
 {% if user.is_authenticated %}
 <a href="{% url 'main:add-memo' %}" class="w3-button w3-circle">+</a>
@@ -33,7 +48,8 @@
         </div>
         <div class="col-sm-6 my-1">
             <div class="progress" style="height: 24px;">
-                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: {{ progress_percentage }}%"
+                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
+                     style="width: {{ progress_percentage }}%"
                      aria-valuenow="{{ progress_percentage }}"
                      aria-valuemin="0" aria-valuemax="100"></div>
             </div>
