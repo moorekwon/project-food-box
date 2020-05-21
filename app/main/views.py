@@ -124,27 +124,31 @@ def add_others(request):
 def memo(request):
     if request.user.is_authenticated:
         my_memo_ingredients = MyMemoIngredient.objects.filter(user=request.user)
-        my_memo_ingredients_count = len(my_memo_ingredients)
-
-        my_memo_ingredients_ve, my_memo_ingredients_me, my_memo_ingredients_ma, my_memo_ingredients_gr, my_memo_ingredients_sa, my_memo_ingredients_mi, my_memo_ingredients_ot = list(), list(), list(), list(), list(), list(), list()
+        ingredients_not_checked, my_memo_ingredients_ve, my_memo_ingredients_me, my_memo_ingredients_ma, my_memo_ingredients_gr, my_memo_ingredients_sa, my_memo_ingredients_mi, my_memo_ingredients_ot = list(), list(), list(), list(), list(), list(), list(), list()
 
         for my_memo_ingredient in my_memo_ingredients:
-            if my_memo_ingredient.ingredient.type == 'vegetables':
-                my_memo_ingredients_ve.append(my_memo_ingredient)
-            elif my_memo_ingredient.ingredient.type == 'meat':
-                my_memo_ingredients_me.append(my_memo_ingredient)
-            elif my_memo_ingredient.ingredient.type == 'marine':
-                my_memo_ingredients_ma.append(my_memo_ingredient)
-            elif my_memo_ingredient.ingredient.type == 'grain':
-                my_memo_ingredients_gr.append(my_memo_ingredient)
-            elif my_memo_ingredient.ingredient.type == 'sauce':
-                my_memo_ingredients_sa.append(my_memo_ingredient)
-            elif my_memo_ingredient.ingredient.type == 'milk':
-                my_memo_ingredients_mi.append(my_memo_ingredient)
-            else:
-                my_memo_ingredients_ot.append(my_memo_ingredient)
+            if my_memo_ingredient.status == 'not_checked':
+                ingredients_not_checked.append(my_memo_ingredient)
+            if my_memo_ingredient.ingredient is not None:
+                if my_memo_ingredient.ingredient.type == 'vegetables':
+                    my_memo_ingredients_ve.append(my_memo_ingredient)
+                elif my_memo_ingredient.ingredient.type == 'meat':
+                    my_memo_ingredients_me.append(my_memo_ingredient)
+                elif my_memo_ingredient.ingredient.type == 'marine':
+                    my_memo_ingredients_ma.append(my_memo_ingredient)
+                elif my_memo_ingredient.ingredient.type == 'grain':
+                    my_memo_ingredients_gr.append(my_memo_ingredient)
+                elif my_memo_ingredient.ingredient.type == 'sauce':
+                    my_memo_ingredients_sa.append(my_memo_ingredient)
+                elif my_memo_ingredient.ingredient.type == 'milk':
+                    my_memo_ingredients_mi.append(my_memo_ingredient)
+                else:
+                    my_memo_ingredients_ot.append(my_memo_ingredient)
+
+        not_checked_count = len(ingredients_not_checked)
 
         context = {
+            'not_checked_count': not_checked_count,
             'my_memo_ingredients': my_memo_ingredients,
             'my_memo_ingredients_ve': my_memo_ingredients_ve,
             'my_memo_ingredients_me': my_memo_ingredients_me,
@@ -152,7 +156,6 @@ def memo(request):
             'my_memo_ingredients_gr': my_memo_ingredients_gr,
             'my_memo_ingredients_sa': my_memo_ingredients_sa,
             'my_memo_ingredients_mi': my_memo_ingredients_mi,
-            'my_memo_ingredients_count': my_memo_ingredients_count,
         }
         return render(request, 'main/memo/memo.html', context)
     return render(request, 'main/memo/memo.html')
@@ -183,6 +186,17 @@ def add_memo_ingredient(request, pk):
 def delete_memo_ingredient(request, pk):
     my_memo_ingredient = MyMemoIngredient.objects.get(pk=pk)
     my_memo_ingredient.delete()
+    return redirect('main:memo')
+
+
+def memo_check(request, pk):
+    my_memo_ingredient = MyMemoIngredient.objects.get(pk=pk)
+    if my_memo_ingredient.status == 'checked':
+        my_memo_ingredient.status = 'not_checked'
+        my_memo_ingredient.save()
+    else:
+        my_memo_ingredient.status = 'checked'
+        my_memo_ingredient.save()
     return redirect('main:memo')
 
 

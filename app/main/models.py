@@ -26,8 +26,8 @@ class Ingredient(models.Model):
     keeping_days = models.PositiveIntegerField()
     kcalories = models.PositiveIntegerField()
     image = models.ImageField(upload_to='images/ingredients/')
-    fridger = models.CharField(max_length=2, choices=FRIDGER, null=False)
-    type = models.CharField(choices=TYPE, max_length=10, null=False)
+    fridger = models.CharField(max_length=2, choices=FRIDGER)
+    type = models.CharField(choices=TYPE, max_length=10, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -35,7 +35,7 @@ class Ingredient(models.Model):
 
 class MyStoredIngredient(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, blank=True, null=True)
     input_date = models.DateField(default=datetime.date.today)
 
     def __str__(self):
@@ -68,6 +68,11 @@ class MyStoredIngredient(models.Model):
 
 
 class MyMemoIngredient(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, blank=True, null=True)
+    STATUS = (
+        ('checked', 'checked'),
+        ('not_checked', 'not_checked'),
+    )
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    status = models.CharField(choices=STATUS, max_length=20, default='not_checked')
