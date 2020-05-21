@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from config.settings import SECRETS
@@ -124,11 +125,13 @@ def add_others(request):
 def memo(request):
     if request.user.is_authenticated:
         my_memo_ingredients = MyMemoIngredient.objects.filter(user=request.user)
-        ingredients_not_checked, my_memo_ingredients_ve, my_memo_ingredients_me, my_memo_ingredients_ma, my_memo_ingredients_gr, my_memo_ingredients_sa, my_memo_ingredients_mi, my_memo_ingredients_ot = list(), list(), list(), list(), list(), list(), list(), list()
+        ingredients_not_checked, ingredients_checked, my_memo_ingredients_ve, my_memo_ingredients_me, my_memo_ingredients_ma, my_memo_ingredients_gr, my_memo_ingredients_sa, my_memo_ingredients_mi, my_memo_ingredients_ot = list(), list(), list(), list(), list(), list(), list(), list(), list()
 
         for my_memo_ingredient in my_memo_ingredients:
             if my_memo_ingredient.status == 'not_checked':
                 ingredients_not_checked.append(my_memo_ingredient)
+            else:
+                ingredients_checked.append(my_memo_ingredient)
             if my_memo_ingredient.ingredient is not None:
                 if my_memo_ingredient.ingredient.type == 'vegetables':
                     my_memo_ingredients_ve.append(my_memo_ingredient)
@@ -146,9 +149,14 @@ def memo(request):
                     my_memo_ingredients_ot.append(my_memo_ingredient)
 
         not_checked_count = len(ingredients_not_checked)
+        checked_count = len(ingredients_checked)
+
+        progress_percentage = int((checked_count / len(my_memo_ingredients)) * 100)
+        print('progress_percentage >> ', progress_percentage)
 
         context = {
             'not_checked_count': not_checked_count,
+            'progress_percentage': progress_percentage,
             'my_memo_ingredients': my_memo_ingredients,
             'my_memo_ingredients_ve': my_memo_ingredients_ve,
             'my_memo_ingredients_me': my_memo_ingredients_me,
@@ -198,6 +206,17 @@ def memo_check(request, pk):
         my_memo_ingredient.status = 'checked'
         my_memo_ingredient.save()
     return redirect('main:memo')
+
+
+def memo_check_clear(request):
+    my_memo_ingredients = MyMemoIngredient.objects.filter(user=request.user)
+    for my_memo_ingredient in my_memo_ingredients:
+        if my_memo_ingredient.status == 'checked':
+            MyStoredIngredient.objects.get_or_create(user=request.user, ingredient=my_memo_ingredient.ingredient)
+            my_memo_ingredient.delete()
+            return redirect('main:memo')
+        else:
+            pass
 
 
 def blog(request):

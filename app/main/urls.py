@@ -25,6 +25,7 @@ urlpatterns = [
     path('memo/add/<int:pk>/', views.add_memo_ingredient, name='add-memo-ingredient'),
     path('memo/delete/<int:pk>/', views.delete_memo_ingredient, name='delete-memo-ingredient'),
     path('memo/check/<int:pk>/', views.memo_check, name='memo-check'),
+    path('memo/check/clear/', views.memo_check_clear, name='memo-check-clear'),
 
     path('blog/', views.blog, name='blog'),
     path('recommendation/', views.recommendation, name='recommendation'),
