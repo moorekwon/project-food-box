@@ -150,9 +150,12 @@ def memo(request):
 
         not_checked_count = len(ingredients_not_checked)
         checked_count = len(ingredients_checked)
+        all_count = len(my_memo_ingredients)
 
-        progress_percentage = int((checked_count / len(my_memo_ingredients)) * 100)
-        print('progress_percentage >> ', progress_percentage)
+        if all_count:
+            progress_percentage = int((checked_count / all_count) * 100)
+        else:
+            progress_percentage = 0
 
         context = {
             'not_checked_count': not_checked_count,
