@@ -213,13 +213,17 @@ def memo_check(request, pk):
 
 def memo_check_clear(request):
     my_memo_ingredients = MyMemoIngredient.objects.filter(user=request.user)
+    checked_clear = list()
     for my_memo_ingredient in my_memo_ingredients:
         if my_memo_ingredient.status == 'checked':
             MyStoredIngredient.objects.get_or_create(user=request.user, ingredient=my_memo_ingredient.ingredient)
-            my_memo_ingredient.delete()
-            return redirect('main:memo')
-        else:
-            pass
+            checked_clear.append(my_memo_ingredient)
+        else: pass
+
+    for checked_clear_item in checked_clear:
+        checked_clear_item.delete()
+
+    return redirect('main:memo')
 
 
 def blog(request):
