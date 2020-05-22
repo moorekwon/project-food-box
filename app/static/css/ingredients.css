@@ -4,6 +4,10 @@ body {
   font-family: 'Stylish', sans-serif;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 .strong {
     color: #e83e8c;
 }
