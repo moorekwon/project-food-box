@@ -22,15 +22,18 @@
             <div class="card card-signin my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">로그인</h5>
-                    <form class="form-signin">
+                    <form action="{% url 'members:signin' %}" method="post" class="form-signin">
+                        {% csrf_token %}
                         <div class="form-label-group">
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address"
+                            <input type="email" name="email" id="inputEmail" class="form-control"
+                                   placeholder="Email address"
                                    required autofocus>
                             <label for="inputEmail">이메일 주소</label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+                            <input type="password" name="password" id="inputPassword" class="form-control"
+                                   placeholder="Password"
                                    required>
                             <label for="inputPassword">비밀번호</label>
                         </div>
@@ -44,13 +47,17 @@
                             로그인하기
                         </button>
                         <hr class="my-4">
-                        <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i
-                                class="fab fa-google mr-2"></i> Google로 로그인
-                        </button>
-                        <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i
-                                class="fab fa-facebook-f mr-2"></i> Facebook으로 로그인
-                        </button>
+                        <!--                        <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i-->
+                        <!--                                class="fab fa-google mr-2"></i> Google로 로그인-->
+                        <!--                        </button>-->
+                        <!--                        <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i-->
+                        <!--                                class="fab fa-facebook-f mr-2"></i> Facebook으로 로그인-->
+                        <!--                        </button>-->
                     </form>
+
+                    {% if error_msg %}
+                    <p class="strong">{{ error_msg }}</p>
+                    {% endif %}
                 </div>
             </div>
         </div>

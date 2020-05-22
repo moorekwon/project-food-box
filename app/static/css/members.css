@@ -1,3 +1,7 @@
+.strong {
+    color: #e83e8c;
+}
+
 :root {
   --input-padding-x: 1.5rem;
   --input-padding-y: .75rem;
