@@ -6,6 +6,15 @@ body {
     color: #e83e8c;
 }
 
+.logout {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.logout:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
 .w3-button {
     border: none;
     display: inline-block;

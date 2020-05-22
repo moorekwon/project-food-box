@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 
@@ -39,3 +39,8 @@ def signup(request):
         login(request, user)
         return redirect('main:fridge')
     return render(request, 'members/signup.html')
+
+
+def logoff(request):
+    logout(request)
+    return redirect('main:main')
