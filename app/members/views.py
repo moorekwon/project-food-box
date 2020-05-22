@@ -1,6 +1,8 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
+
+User = get_user_model()
 
 
 def signin(request):
@@ -22,4 +24,18 @@ def signin(request):
 
 
 def signup(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        users = User.objects.all()
+
+        if users.filter(email=email):
+            error_msg = '이미 사용중인 email 입니다.'
+            context = {
+                'error_msg': error_msg,
+            }
+            return render(request, 'members/signup.html', context)
+        user = User.objects.create_user(email=email, password=password)
+        login(request, user)
+        return redirect('main:fridge')
     return render(request, 'members/signup.html')
