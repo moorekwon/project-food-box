@@ -76,16 +76,14 @@ def input_date(request, pk):
             }
             return render(request, 'main/fridge/input_date.html', context)
 
-        else:
-            date = request.POST['input_date']
-            MyStoredIngredient.objects.create(input_date=date, user=request.user, ingredient=ingredient)
-            return redirect('main:fridge')
+        date = request.POST['input_date']
+        MyStoredIngredient.objects.create(input_date=date, user=request.user, ingredient=ingredient)
+        return redirect('main:fridge')
 
-    else:
-        context = {
-            'ingredient': ingredient,
-        }
-        return render(request, 'main/fridge/input_date.html', context)
+    context = {
+        'ingredient': ingredient,
+    }
+    return render(request, 'main/fridge/input_date.html', context)
 
 
 def delete_fridge_ingredient(request, pk):
@@ -128,10 +126,9 @@ def memo(request):
         ingredients_not_checked, ingredients_checked, my_memo_ingredients_ve, my_memo_ingredients_me, my_memo_ingredients_ma, my_memo_ingredients_gr, my_memo_ingredients_sa, my_memo_ingredients_mi, my_memo_ingredients_ot = list(), list(), list(), list(), list(), list(), list(), list(), list()
 
         for my_memo_ingredient in my_memo_ingredients:
-            if my_memo_ingredient.status == 'not_checked':
-                ingredients_not_checked.append(my_memo_ingredient)
-            else:
-                ingredients_checked.append(my_memo_ingredient)
+            if my_memo_ingredient.status == 'not_checked': ingredients_not_checked.append(my_memo_ingredient)
+            else: ingredients_checked.append(my_memo_ingredient)
+
             if my_memo_ingredient.ingredient is not None:
                 if my_memo_ingredient.ingredient.type == 'vegetables':
                     my_memo_ingredients_ve.append(my_memo_ingredient)
@@ -152,10 +149,8 @@ def memo(request):
         checked_count = len(ingredients_checked)
         all_count = len(my_memo_ingredients)
 
-        if all_count:
-            progress_percentage = int((checked_count / all_count) * 100)
-        else:
-            progress_percentage = 0
+        if all_count: progress_percentage = int((checked_count / all_count) * 100)
+        else: progress_percentage = 0
 
         context = {
             'not_checked_count': not_checked_count,
@@ -177,10 +172,8 @@ def add_memo(request):
 
     search_text = request.GET.get('search_text')
 
-    if search_text:
-        ingredients = ingredients.filter(name__contains=search_text)
-    else:
-        ingredients = ingredients
+    if search_text: ingredients = ingredients.filter(name__contains=search_text)
+    else: ingredients = ingredients
 
     context = {
         'ingredients': ingredients,
@@ -222,7 +215,6 @@ def memo_check_clear(request):
 
     for checked_clear_item in checked_clear:
         checked_clear_item.delete()
-
     return redirect('main:memo')
 
 
