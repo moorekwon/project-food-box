@@ -64,6 +64,7 @@ def add_fridge(request):
 
 def input_date(request, pk):
     ingredient = Ingredient.objects.get(pk=pk)
+    print('ingredient.image.url >> ', ingredient.image.url)
 
     if request.method == 'POST':
         if MyStoredIngredient.objects.filter(user=request.user, ingredient=ingredient):
@@ -126,8 +127,10 @@ def memo(request):
         ingredients_not_checked, ingredients_checked, my_memo_ingredients_ve, my_memo_ingredients_me, my_memo_ingredients_ma, my_memo_ingredients_gr, my_memo_ingredients_sa, my_memo_ingredients_mi, my_memo_ingredients_ot = list(), list(), list(), list(), list(), list(), list(), list(), list()
 
         for my_memo_ingredient in my_memo_ingredients:
-            if my_memo_ingredient.status == 'not_checked': ingredients_not_checked.append(my_memo_ingredient)
-            else: ingredients_checked.append(my_memo_ingredient)
+            if my_memo_ingredient.status == 'not_checked':
+                ingredients_not_checked.append(my_memo_ingredient)
+            else:
+                ingredients_checked.append(my_memo_ingredient)
 
             if my_memo_ingredient.ingredient is not None:
                 if my_memo_ingredient.ingredient.type == 'vegetables':
@@ -149,8 +152,10 @@ def memo(request):
         checked_count = len(ingredients_checked)
         all_count = len(my_memo_ingredients)
 
-        if all_count: progress_percentage = int((checked_count / all_count) * 100)
-        else: progress_percentage = 0
+        if all_count:
+            progress_percentage = int((checked_count / all_count) * 100)
+        else:
+            progress_percentage = 0
 
         context = {
             'not_checked_count': not_checked_count,
@@ -172,8 +177,10 @@ def add_memo(request):
 
     search_text = request.GET.get('search_text')
 
-    if search_text: ingredients = ingredients.filter(name__contains=search_text)
-    else: ingredients = ingredients
+    if search_text:
+        ingredients = ingredients.filter(name__contains=search_text)
+    else:
+        ingredients = ingredients
 
     context = {
         'ingredients': ingredients,
@@ -211,7 +218,8 @@ def memo_check_clear(request):
         if my_memo_ingredient.status == 'checked':
             MyStoredIngredient.objects.get_or_create(user=request.user, ingredient=my_memo_ingredient.ingredient)
             checked_clear.append(my_memo_ingredient)
-        else: pass
+        else:
+            pass
 
     for checked_clear_item in checked_clear:
         checked_clear_item.delete()

@@ -47,9 +47,12 @@ class MyStoredIngredient(models.Model):
         left = keeping_date - datetime.datetime.today().date()
         left_days = left.days
 
-        if keeping_days - left_days <= keeping_days * 0.3: return '신선도 높음'
-        elif keeping_days - left_days <= keeping_days * 0.7: return '신선도 보통'
-        elif keeping_days - left_days <= keeping_days: return '신선도 낮음'
+        if keeping_days - left_days <= keeping_days * 0.3:
+            return '신선도 높음'
+        elif keeping_days - left_days <= keeping_days * 0.7:
+            return '신선도 보통'
+        elif keeping_days - left_days <= keeping_days:
+            return '신선도 낮음'
         return '신선도 위험'
 
     def left_days(self):
