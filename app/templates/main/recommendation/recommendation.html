@@ -12,7 +12,9 @@
         padding: 0;
     }
 
-
+    li {
+        padding: 40px 0;
+    }
 </style>
 {% endblock %}
 
@@ -40,7 +42,7 @@
             </h1>
 
             <div class="row">
-                <div class="col-lg-4 col-sm-6 mb-4" style="flex: 0 0 25%; max-width: 25%;">
+                <div class="col my-2">
                     <div class="card" style="width: 240px; height: 320px;">
                         <img class="card-img-top" src="{% static 'images/쌈밥.jpg' %}" alt=""
                              style="width: 100%; height: 180px;">
@@ -48,11 +50,11 @@
                             <h4 class="card-title">쌈밥</h4>
 
                             <p class="card-text">(좋아요 버튼 { 좋아요 수 })</p>
-                            <a href="" class="card-text">레시피 보기 ></a>
+                            <a href="{% url 'main:recipe' %}" class="card-text">레시피 보기 ></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 mb-4" style="flex: 0 0 25%; max-width: 25%;">
+                <div class="col my-2">
                     <div class="card" style="width: 240px; height: 320px;">
                         <img class="card-img-top" src="{% static 'images/오이생채.jpg' %}" alt=""
                              style="width: 100%; height: 180px;">
@@ -64,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 mb-4" style="flex: 0 0 25%; max-width: 25%;">
+                <div class="col my-2">
                     <div class="card" style="width: 240px; height: 320px;">
                         <img class="card-img-top" src="{% static 'images/쌈밥.jpg' %}" alt=""
                              style="width: 100%; height: 180px;">
@@ -76,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 mb-4" style="flex: 0 0 25%; max-width: 25%;">
+                <div class="col my-2">
                     <div class="card" style="width: 240px; height: 320px;">
                         <img class="card-img-top" src="{% static 'images/오이생채.jpg' %}" alt=""
                              style="width: 100%; height: 180px;">
@@ -97,7 +99,31 @@
             </h1>
 
             <div class="row">
-                <div class="col-lg-4 col-sm-6 mb-4" style="flex: 0 0 25%; max-width: 25%;">
+                <div class="col my-2">
+                    <div class="card" style="width: 240px; height: 320px;">
+                        <img class="card-img-top" src="{% static 'images/쌈밥.jpg' %}" alt=""
+                             style="width: 100%; height: 180px;">
+                        <div class="card-body">
+                            <h4 class="card-title">쌈밥</h4>
+
+                            <p class="card-text">(좋아요 버튼 { 좋아요 수 })</p>
+                            <a href="{% url 'main:recipe' %}" class="card-text">레시피 보기 ></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col my-2">
+                    <div class="card" style="width: 240px; height: 320px;">
+                        <img class="card-img-top" src="{% static 'images/오이생채.jpg' %}" alt=""
+                             style="width: 100%; height: 180px;">
+                        <div class="card-body">
+                            <h4 class="card-title">오이생채</h4>
+
+                            <p class="card-text">(좋아요 버튼 { 좋아요 수 })</p>
+                            <a href="" class="card-text">레시피 보기 ></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col my-2">
                     <div class="card" style="width: 240px; height: 320px;">
                         <img class="card-img-top" src="{% static 'images/쌈밥.jpg' %}" alt=""
                              style="width: 100%; height: 180px;">
@@ -109,11 +135,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 mb-4">
+                <div class="col my-2">
                     <div class="card" style="width: 240px; height: 320px;">
-                        <img class="card-img-top"
-                             src="{% static 'images/오이생채.jpg' %}"
-                             alt=""
+                        <img class="card-img-top" src="{% static 'images/오이생채.jpg' %}" alt=""
                              style="width: 100%; height: 180px;">
                         <div class="card-body">
                             <h4 class="card-title">오이생채</h4>

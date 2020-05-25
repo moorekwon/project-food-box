@@ -226,9 +226,13 @@ def memo_check_clear(request):
     return redirect('main:memo')
 
 
-def blog(request):
-    return render(request, 'main/blog/blog.html')
-
-
 def recommendation(request):
     return render(request, 'main/recommendation/recommendation.html')
+
+
+def recipe(request):
+    return render(request, 'main/recommendation/recipe.html')
+
+
+def blog(request):
+    return render(request, 'main/blog/blog.html')
