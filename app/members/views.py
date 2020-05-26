@@ -43,4 +43,4 @@ def signup(request):
 
 def logoff(request):
     logout(request)
-    return redirect('main:main')
+    return redirect('start')

@@ -19,8 +19,8 @@ def trigger_error(request):
 #     return response
 
 
-def main(request):
-    return render(request, 'main/main.html')
+def start(request):
+    return render(request, 'start.html')
 
 
 def fridge(request):

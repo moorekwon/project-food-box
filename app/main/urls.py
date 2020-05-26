@@ -5,7 +5,6 @@ from main import views
 app_name = 'main'
 
 urlpatterns = [
-    path('', views.main, name='main'),
     path('fridge/', views.fridge, name='fridge'),
     path('fridge/add/', views.add_fridge, name='add-fridge'),
     path('fridge/add/<int:pk>/', views.input_date, name='input-date'),

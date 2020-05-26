@@ -18,12 +18,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from main.views import trigger_error
+from main.views import trigger_error, start
 
 urlpatterns = [
     path('debug/', trigger_error),
 
     path('admin/', admin.site.urls),
+
+    path('', start, name='start'),
     path('main/', include('main.urls')),
     path('members/', include('members.urls')),
 ]
