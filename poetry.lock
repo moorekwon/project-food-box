@@ -143,6 +143,17 @@ six = ">=1.2"
 
 [[package]]
 category = "main"
+description = "Django multiple select field"
+name = "django-multiselectfield"
+optional = false
+python-versions = "*"
+version = "0.1.12"
+
+[package.dependencies]
+django = ">=1.4"
+
+[[package]]
+category = "main"
 description = "Support for many storage backends in Django"
 name = "django-storages"
 optional = false
@@ -620,7 +631,7 @@ version = "1.5.0"
 
 [[package]]
 category = "main"
-description = "Python client for  (https://getsentry.com)"
+description = "Python client for Sentry (https://getsentry.com)"
 name = "sentry-sdk"
 optional = false
 python-versions = "*"
@@ -751,7 +762,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "6246b086834c0d3b92698e9b07a0259cadd2fac46e69b1feb80530bd015c44b6"
+content-hash = "0bccfd41bdbe333f99a5ff65e6596974299a059262bcf9e823b2d76043f8459a"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -805,6 +816,10 @@ django = [
 django-extensions = [
     {file = "django-extensions-2.2.9.tar.gz", hash = "sha256:2f81b618ba4d1b0e58603e25012e5c74f88a4b706e0022a3b21f24f0322a6ce6"},
     {file = "django_extensions-2.2.9-py2.py3-none-any.whl", hash = "sha256:b19182d101a441fe001c5753553a901e2ef3ff60e8fbbe38881eb4a61fdd17c4"},
+]
+django-multiselectfield = [
+    {file = "django-multiselectfield-0.1.12.tar.gz", hash = "sha256:d0a4c71568fb2332c71478ffac9f8708e01314a35cf923dfd7a191343452f9f9"},
+    {file = "django_multiselectfield-0.1.12-py3-none-any.whl", hash = "sha256:c270faa7f80588214c55f2d68cbddb2add525c2aa830c216b8a198de914eb470"},
 ]
 django-storages = [
     {file = "django-storages-1.9.1.tar.gz", hash = "sha256:a59e9923cbce7068792f75344ed7727021ee4ac20f227cf17297d0d03d141e91"},

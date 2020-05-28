@@ -230,6 +230,10 @@ def recommendation(request):
     return render(request, 'main/recommendation/recommendation.html')
 
 
+def like(request, pk):
+    pass
+
+
 def recipe(request):
     return render(request, 'main/recommendation/recipe.html')
 

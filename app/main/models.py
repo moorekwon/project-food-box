@@ -2,6 +2,7 @@ import datetime
 
 from django.contrib.auth import get_user_model
 from django.db import models
+from multiselectfield import MultiSelectField
 
 User = get_user_model()
 
@@ -28,6 +29,7 @@ class Ingredient(models.Model):
     image = models.ImageField(upload_to='images/ingredients/')
     fridger = models.CharField(max_length=2, choices=FRIDGER)
     type = models.CharField(choices=TYPE, max_length=10, null=True, blank=True)
+    food = models.ForeignKey('RecommendedFood', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -74,3 +76,36 @@ class MyMemoIngredient(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     status = models.CharField(choices=STATUS, max_length=20, default='not_checked')
+
+
+class RecommendedFood(models.Model):
+    # ingredients = [ingredient.name for ingredient in Ingredient.objects.all()]
+    # ingredient_list = list()
+    # for ingredient in ingredients:
+    #     ingredient_tuple = (ingredient,) * 2
+    #     ingredient_list.append(ingredient_tuple)
+    #
+    # INGREDIENT = tuple(ingredient_list)
+    TYPE = (
+        ('육수', '육수'),
+        ('채소', '채소'),
+        ('해산물', '해산물'),
+        ('고기/계란', '고기/계란'),
+        ('밥/쌀', '밥/쌀'),
+        ('김치/발효', '김치/발효'),
+        ('간식/디저트', '간식/디저트'),
+    )
+
+    name = models.CharField(max_length=30)
+    ingredients_detail = models.CharField(max_length=200)
+    # ingredient = MultiSelectField(choices=INGREDIENT, max_length=100)
+    # ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    recipe = models.TextField()
+    type = models.CharField(choices=TYPE, max_length=30)
+    like = models.BooleanField(default=False)
+
+    # def main_ingredient(self):
+    #     pass
+    #
+    # def sub_ingredient(self):
+    #     pass

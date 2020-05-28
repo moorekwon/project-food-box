@@ -28,6 +28,7 @@ urlpatterns = [
 
     path('recommendation/', views.recommendation, name='recommendation'),
     path('recommendation/recipe/', views.recipe, name='recipe'),
+    path('recommendation/like/<int:pk>/', views.like, name='like'),
 
     path('blog/', views.blog, name='blog'),
 ]
