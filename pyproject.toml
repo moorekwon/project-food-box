@@ -14,7 +14,6 @@ pillow = "^7.1.2"
 django-storages = "^1.9.1"
 boto3 = "^1.13.10"
 sentry_sdk = "^0.14.4"
-django-multiselectfield = "^0.1.12"
 
 [tool.poetry.dev-dependencies]
 
