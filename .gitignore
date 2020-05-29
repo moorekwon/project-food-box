@@ -4,6 +4,7 @@
 
 /secrets.json
 /.idea
+/app/.ipynb_checkpoints
 
 ### Django ###
 *.log

@@ -2,7 +2,6 @@ import datetime
 
 from django.contrib.auth import get_user_model
 from django.db import models
-from multiselectfield import MultiSelectField
 
 User = get_user_model()
 
@@ -29,7 +28,6 @@ class Ingredient(models.Model):
     image = models.ImageField(upload_to='images/ingredients/')
     fridger = models.CharField(max_length=2, choices=FRIDGER)
     type = models.CharField(choices=TYPE, max_length=10, null=True, blank=True)
-    food = models.ForeignKey('RecommendedFood', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -98,8 +96,7 @@ class RecommendedFood(models.Model):
 
     name = models.CharField(max_length=30)
     ingredients_detail = models.CharField(max_length=200)
-    # ingredient = MultiSelectField(choices=INGREDIENT, max_length=100)
-    # ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    ingredient = models.ManyToManyField(Ingredient, blank=True)
     recipe = models.TextField()
     type = models.CharField(choices=TYPE, max_length=30)
     like = models.BooleanField(default=False)
@@ -109,3 +106,6 @@ class RecommendedFood(models.Model):
     #
     # def sub_ingredient(self):
     #     pass
+
+    def __str__(self):
+        return self.name

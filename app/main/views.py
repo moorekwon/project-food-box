@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from config.settings import SECRETS
-from main.models import Ingredient, MyStoredIngredient, MyMemoIngredient
+from main.models import Ingredient, MyStoredIngredient, MyMemoIngredient, RecommendedFood
 
 
 # sentry debug test
@@ -227,6 +227,9 @@ def memo_check_clear(request):
 
 
 def recommendation(request):
+    all_food = RecommendedFood.objects.filter(
+
+    )
     return render(request, 'main/recommendation/recommendation.html')
 
 
@@ -234,8 +237,13 @@ def like(request, pk):
     pass
 
 
-def recipe(request):
-    return render(request, 'main/recommendation/recipe.html')
+def recipe(request, pk):
+    food = RecommendedFood.objects.get(pk=pk)
+
+    contents = {
+        'food': food,
+    }
+    return render(request, 'main/recommendation/recipe.html', contents)
 
 
 def blog(request):

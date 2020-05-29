@@ -27,7 +27,7 @@ urlpatterns = [
     path('memo/check/clear/', views.memo_check_clear, name='memo-check-clear'),
 
     path('recommendation/', views.recommendation, name='recommendation'),
-    path('recommendation/recipe/', views.recipe, name='recipe'),
+    path('recommendation/recipe/<int:pk>/', views.recipe, name='recipe'),
     path('recommendation/like/<int:pk>/', views.like, name='like'),
 
     path('blog/', views.blog, name='blog'),
