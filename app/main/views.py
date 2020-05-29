@@ -227,10 +227,19 @@ def memo_check_clear(request):
 
 
 def recommendation(request):
-    all_food = RecommendedFood.objects.filter(
+    my_stored_ingredients = MyStoredIngredient.objects.all()
 
-    )
-    return render(request, 'main/recommendation/recommendation.html')
+    food_lst = list()
+    for my_stored_ingredient in my_stored_ingredients:
+        all_food = RecommendedFood.objects.filter(ingredient=my_stored_ingredient.ingredient)
+        for food in all_food:
+            food_lst.append(food)
+    food_set = set(food_lst)
+
+    contents = {
+        'food_set': food_set,
+    }
+    return render(request, 'main/recommendation/recommendation.html', contents)
 
 
 def like(request, pk):
