@@ -169,7 +169,7 @@ def memo(request):
             'my_memo_ingredients_mi': my_memo_ingredients_mi,
         }
         return render(request, 'main/memo/memo.html', context)
-    return render(request, 'main/memo/memo.html')
+    return redirect('main:memo')
 
 
 def add_memo(request):
@@ -227,19 +227,48 @@ def memo_check_clear(request):
 
 
 def recommendation(request):
-    my_stored_ingredients = MyStoredIngredient.objects.filter(user=request.user)
+    if request.user.is_authenticated:
+        my_stored_ingredients = MyStoredIngredient.objects.filter(user=request.user)
 
-    food_lst = list()
-    for my_stored_ingredient in my_stored_ingredients:
-        all_food = RecommendedFood.objects.filter(ingredient=my_stored_ingredient.ingredient)
-        for food in all_food:
-            food_lst.append(food)
-    food_set = set(food_lst)
+        food_all, food_br, food_ve, food_ma, food_me, food_ri, food_ki, food_de = list(), list(), list(), list(), list(), list(), list(), list()
+        for my_stored_ingredient in my_stored_ingredients:
+            all_food = RecommendedFood.objects.filter(ingredient=my_stored_ingredient.ingredient)
 
-    contents = {
-        'food_set': food_set,
-    }
-    return render(request, 'main/recommendation/recommendation.html', contents)
+            for food in all_food:
+                print('food >> ', food)
+                if food is not None:
+                    if food.type == '육수':
+                        food_br.append(food)
+                    elif food.type == '채소':
+                        food_ve.append(food)
+                    elif food.type == '해산물':
+                        food_ma.append(food)
+                    elif food.type == '고기/계란':
+                        food_me.append(food)
+                    elif food.type == '쌀/밥':
+                        food_ri.append(food)
+                    elif food.type == '김치/발효':
+                        food_ki.append(food)
+                    elif food.type == '간식/디저트':
+                        food_de.append(food)
+
+        food_all = food_br + food_ve + food_ma + food_me + food_ri + food_ki + food_de
+
+        print('bool(not set(food_all)) >> ', bool(not set(food_all)))
+        print('set(food_all) >> ', set(food_all))
+
+        contents = {
+            'food_all_set': set(food_all),
+            'food_br_set': set(food_br),
+            'food_ve_set': set(food_ve),
+            'food_ma_set': set(food_ma),
+            'food_me_set': set(food_me),
+            'food_ri_set': set(food_ri),
+            'food_ki_set': set(food_ki),
+            'food_de_set': set(food_de),
+        }
+        return render(request, 'main/recommendation/recommendation.html', contents)
+    return redirect('main:recommendation')
 
 
 def like(request, pk):

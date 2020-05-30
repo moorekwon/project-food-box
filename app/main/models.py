@@ -82,16 +82,15 @@ class RecommendedFood(models.Model):
     # for ingredient in ingredients:
     #     ingredient_tuple = (ingredient,) * 2
     #     ingredient_list.append(ingredient_tuple)
-    #
     # INGREDIENT = tuple(ingredient_list)
     TYPE = (
-        ('육수', '육수'),
-        ('채소', '채소'),
-        ('해산물', '해산물'),
-        ('고기/계란', '고기/계란'),
-        ('밥/쌀', '밥/쌀'),
-        ('김치/발효', '김치/발효'),
-        ('간식/디저트', '간식/디저트'),
+        ('broth', '육수'),
+        ('vegetables', '채소'),
+        ('marine', '해산물'),
+        ('meat', '고기/계란'),
+        ('rice', '밥/쌀'),
+        ('kimchi', '김치/발효'),
+        ('dessert', '간식/디저트'),
     )
 
     user = models.ManyToManyField(User)
@@ -101,14 +100,8 @@ class RecommendedFood(models.Model):
     recipe = models.TextField()
     type = models.CharField(choices=TYPE, max_length=30)
 
-    def user_count(self):
-        return len(self.user.all())
-
-    # def main_ingredient(self):
-    #     pass
-    #
-    # def sub_ingredient(self):
-    #     pass
-
     def __str__(self):
         return self.name
+
+    def user_count(self):
+        return len(self.user.all())
