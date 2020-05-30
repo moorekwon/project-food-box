@@ -94,12 +94,15 @@ class RecommendedFood(models.Model):
         ('간식/디저트', '간식/디저트'),
     )
 
+    user = models.ManyToManyField(User)
     name = models.CharField(max_length=30)
     ingredients_detail = models.CharField(max_length=200)
     ingredient = models.ManyToManyField(Ingredient, blank=True)
     recipe = models.TextField()
     type = models.CharField(choices=TYPE, max_length=30)
-    like = models.BooleanField(default=False)
+
+    def user_count(self):
+        return len(self.user.all())
 
     # def main_ingredient(self):
     #     pass

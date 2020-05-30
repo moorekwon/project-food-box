@@ -227,7 +227,7 @@ def memo_check_clear(request):
 
 
 def recommendation(request):
-    my_stored_ingredients = MyStoredIngredient.objects.all()
+    my_stored_ingredients = MyStoredIngredient.objects.filter(user=request.user)
 
     food_lst = list()
     for my_stored_ingredient in my_stored_ingredients:
@@ -243,7 +243,12 @@ def recommendation(request):
 
 
 def like(request, pk):
-    pass
+    recommended_food = RecommendedFood.objects.get(pk=pk)
+    if request.user in recommended_food.user.all():
+        recommended_food.user.remove(request.user)
+    else:
+        recommended_food.user.add(request.user)
+    return redirect('main:recommendation')
 
 
 def recipe(request, pk):

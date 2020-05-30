@@ -1,6 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.core.management import BaseCommand
 
 from main.models import Ingredient, RecommendedFood
+
+User = get_user_model()
 
 
 class Command(BaseCommand):
@@ -27,6 +30,9 @@ class Command(BaseCommand):
         mackerel = Ingredient.objects.get(name=NAME[2])
         lemon = Ingredient.objects.get(name=NAME[3])
         print('Ingredient 객체들에게 각각 변수명을 할당하였습니다.')
+
+        # hjk = User.objects.get(email='hjk@hjk.com')
+        # print('User 객체에 변수명을 할당하였습니다.')
 
         NAME = ('불고기', '쌈밥', '고등어조림')
         DETAIL = (
