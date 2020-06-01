@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.core.management import BaseCommand
 
-from crawling.crawling import NAMES, INGREDIENTS, RECIPES, TYPES
+from crawling.crawling import NAMES, INGREDIENTS, RECIPES, TYPES, IMAGE_URLS
 from main.models import Ingredient, RecommendedFood
 
 User = get_user_model()
@@ -15,15 +15,12 @@ class Command(BaseCommand):
         TYPE = ('vegetables', 'vegetables', 'marine', 'vegetables')
         FRIDGER = ('R', 'F', 'F', 'R')
         IMAGES = ('사과.png', '블루베리.jpg', '고등어.jpg', '레몬.jpg')
-
         name_count = len(NAME)
 
         for index in range(name_count):
             Ingredient.objects.get_or_create(name=NAME[index], keeping_days=KEEPING_DAYS[index],
                                              kcalories=KCALORIES[index], type=TYPE[index], fridger=FRIDGER[index],
                                              image=f'images/ingredients/{IMAGES[index]}')
-
-        print('Ingredient.objects.all() >> ', Ingredient.objects.all())
         print('Ingredient 객체들이 성공적으로 생성되었습니다.')
 
         apple = Ingredient.objects.get(name=NAME[0])
@@ -41,7 +38,6 @@ class Command(BaseCommand):
         for index in range(name_count):
             RecommendedFood.objects.get_or_create(name=NAME[index], ingredients_detail=DETAIL[index],
                                                   recipe=RECIPE[index], type=TYPE[index])
-        print('RecommendedFood.objects.all() >> ', RecommendedFood.objects.all())
         print('RecommendedFood 객체들이 성공적으로 생성되었습니다.')
 
         first = RecommendedFood.objects.filter(name=NAME[0])[0]
@@ -54,7 +50,6 @@ class Command(BaseCommand):
         eighth = RecommendedFood.objects.filter(name=NAME[7])[0]
         nineth = RecommendedFood.objects.filter(name=NAME[8])[0]
         tenth = RecommendedFood.objects.filter(name=NAME[9])[0]
-
         print('RecommendedFood 객체들에게 각각 변수명을 할당하였습니다.')
 
         first.ingredient.add(lemon)

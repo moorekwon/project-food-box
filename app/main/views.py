@@ -235,7 +235,6 @@ def recommendation(request):
             all_food = RecommendedFood.objects.filter(ingredient=my_stored_ingredient.ingredient)
 
             for food in all_food:
-                print('food >> ', food)
                 if food is not None:
                     if food.type == '육수':
                         food_br.append(food)
@@ -253,9 +252,6 @@ def recommendation(request):
                         food_de.append(food)
 
         food_all = food_br + food_ve + food_ma + food_me + food_ri + food_ki + food_de
-
-        print('bool(not set(food_all)) >> ', bool(not set(food_all)))
-        print('set(food_all) >> ', set(food_all))
 
         contents = {
             'food_all_set': set(food_all),

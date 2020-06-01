@@ -5,29 +5,13 @@ from urllib.error import HTTPError, URLError
 
 from bs4 import BeautifulSoup
 
-# path = '/home/hyojinkwon/project-foodbox/app/crawling/crawling.html'
-# url = 'https://terms.naver.com/list.nhn?cid=42701&categoryId=62905'
-#
-# try:
-#     res = request.urlopen(url)
-#     contents = res.read()
-#
-#     with open(path, 'wb') as c:
-#         c.write(contents)
-# except HTTPError as e:
-#     print('httperror occured!')
-# except URLError as e:
-#     print('urlerror occured!')
-# else:
-#     print('download succeed!')
-
 with open('crawling/crawling.html') as fp:
     soup = BeautifulSoup(fp, 'html.parser')
 
 food_lst = soup.select(
     '#content > div.contents_list_wrap.sub > ul.contents_list > li.contents_sub.active > ul > li > a')
 
-NAMES, URLS, INGREDIENTS, RECIPES, TYPES = list(), list(), list(), list(), list()
+NAMES, URLS, INGREDIENTS, RECIPES, TYPES, IMAGE_URLS = list(), list(), list(), list(), list(), list()
 api = 'https://terms.naver.com'
 for food in food_lst:
     url = api + food['href']
@@ -40,25 +24,11 @@ for food in food_lst:
 # print('NAMES >> ', NAMES)
 # print('URLS >> ', URLS)
 
-path = '/home/hyojinkwon/project-foodbox/app/crawling/recipe/'
 not_none_i = list()
+image_api = ''
 for i, food_url in enumerate(URLS):
     path = f'/home/hyojinkwon/project-foodbox/app/crawling/recipe/{i}.html'
 
-    # try:
-    #     res = request.urlopen(food_url)
-    #     contents = res.read()
-    #
-    #     with open(path, 'wb') as c:
-    #         c.write(contents)
-    # except HTTPError as e:
-    #     print('httperror occured!')
-    # except URLError as e:
-    #     print('urlerror occured!')
-    # else:
-    #     print('download succeed!')
-
-    # print('path >> ', path)
     with open(f'crawling/recipe/{i}.html') as fp:
         soup = BeautifulSoup(fp, 'html.parser')
 
@@ -82,18 +52,39 @@ for i, food_url in enumerate(URLS):
             pass
     RECIPES.append(food_recipe)
 
-    if i >= 0 and i <= 2: TYPES.append('육수')
-    if i >= 3 and i <= 18: TYPES.append('채소')
-    if i >= 19 and i <= 24: TYPES.append('해산물')
-    if i >= 25 and i <= 36: TYPES.append('고기/계란')
-    if i >= 37 and i <= 43: TYPES.append('밥/쌀')
-    if i >= 44 and i <= 51: TYPES.append('김치/발효')
-    if i >= 52 and i <= 55: TYPES.append('간식/디저트')
+    if len(TYPES) == 56:
+        pass
+    else:
+        if 0 <= i <= 2: TYPES.append('육수')
+        if 3 <= i <= 18: TYPES.append('채소')
+        if 19 <= i <= 24: TYPES.append('해산물')
+        if 25 <= i <= 36: TYPES.append('고기/계란')
+        if 37 <= i <= 43: TYPES.append('밥/쌀')
+        if 44 <= i <= 51: TYPES.append('김치/발효')
+        if 52 <= i <= 55: TYPES.append('간식/디저트')
+
+    food_images = soup.select('div.thmb.c.thmb_border > span.img_box > a > img#innerImage0')
+    for image in food_images:
+        IMAGE_URLS.append(image['origin_src'])
+
+for i, food_url in enumerate(IMAGE_URLS):
+    # image_path = f'/home/hyojinkwon/project-foodbox/app/static/images/food/{i + 1}.jpg'
+    # try:
+    #     res = request.urlopen(food_url)
+    #     contents = res.read()
+    #     with open(image_path, 'wb') as c:
+    #         c.write(contents)
+    # except HTTPError as e:
+    #     print('httperror occured!')
+    # except URLError as e:
+    #     print('urlerror occured!')
+    # else:
+    #     print('download succeed!')
+    pass
 
 # print('not_none_i >> ', not_none_i)
+print(len(NAMES), len(URLS), len(INGREDIENTS), len(RECIPES), len(TYPES), len(IMAGE_URLS))
 
 # print('INGREDIENTS >> ', INGREDIENTS)
 # print('RECIPES >> ', RECIPES)
 # print('TYPES >> ', TYPES)
-
-# print(len(NAMES), len(URLS), len(INGREDIENTS), len(RECIPES), len(TYPES))

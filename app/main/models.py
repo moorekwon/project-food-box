@@ -77,12 +77,6 @@ class MyMemoIngredient(models.Model):
 
 
 class RecommendedFood(models.Model):
-    # ingredients = [ingredient.name for ingredient in Ingredient.objects.all()]
-    # ingredient_list = list()
-    # for ingredient in ingredients:
-    #     ingredient_tuple = (ingredient,) * 2
-    #     ingredient_list.append(ingredient_tuple)
-    # INGREDIENT = tuple(ingredient_list)
     TYPE = (
         ('broth', '육수'),
         ('vegetables', '채소'),
