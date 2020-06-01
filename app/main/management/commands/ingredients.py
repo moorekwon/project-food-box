@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.core.management import BaseCommand
 
+from crawling.crawling import NAMES, INGREDIENTS, RECIPES, TYPES
 from main.models import Ingredient, RecommendedFood
 
 User = get_user_model()
@@ -31,52 +32,40 @@ class Command(BaseCommand):
         lemon = Ingredient.objects.get(name=NAME[3])
         print('Ingredient 객체들에게 각각 변수명을 할당하였습니다.')
 
-        NAME = ('불고기', '쌈밥', '고등어조림', '오이생채', '무생채', '콩나물무침', '도토리묵무침')
-        DETAIL = (
-            '소고기 600g, 느타리버섯 120g, 팽이버섯 80g, 양파 1개, 대파 ½개, 식용유 2큰술',
-            '쌈 채소 200g, 양배추 200g, 당근 1개, 오이 1개, 밥 4컵',
-            '멸치 육수 2컵, 무 250g, 양파 ½개, 대파 ½개',
-            '고춧가루 ½큰술, 고추장 2작은술, 식초 1작은술, 설탕 1작은술, 다진 마늘 ½작은술, 다진 파 1작은술',
-            '무 500g, 굵은 소금 1큰술',
-            '콩나물 250g, 물 6컵',
-            '도토리묵 500g, 오이 ½개, 양파 ¼개, 쑥갓 30g, 상추 5장, 홍고추 ½개'
-        )
-        RECIPE = (
-            '<p class="txt">1. 양념장을 먼저 만든 후 준비된 소고기에 넣고 냉장고에서 3시간 숙성시킨다.</p> <p class="txt">2. 버섯은 비슷한 크기로 다듬는다. 양파는 채 썰고 대파는 어슷 썬다.</p> <p class="txt">3. 달군 팬에 기름을 두른 후 양파와 불고기를 넣고 센 불에서 볶는다.</p> <p class="txt">4. 불고기가 반쯤 익었을 때 버섯을 넣고 볶는다.</p>',
-            '<p class="txt">1. 쌈장을 만든다.</p> <p class="txt">2. 쌈 채소는 잘 씻어 물기를 제거하고, 양배추는 크게 잘라 찜통에 15분간 쪄서 익힌다.</p> <p class="txt">3. 당근과 오이를 길게 잘라 쌈장에 찍어 먹을 수 있게 준비한다.</p> <p class="txt">4. 쌈장과 채소를 밥과 함께 상에 낸다.</p>',
-            '<h3 class="stress" id="TABLE_OF_CONTENT3">조리순서</h3> <p class="txt">1. 고등어의 내장과 지느러미를 제거한 뒤 찬물에 헹군다. 무와 양파는 1.5cm 두께로 썰고 대파는 어슷 썬다.</p> <p class="txt">2. 그릇에 양념장 재료를 넣고 잘 섞는다.</p> <p class="txt">3. 냄비에 무와 양파를 넣고 그 위에 고등어를 올린다.</p> <p class="txt">4. 양념장을 고등어 위에 끼얹고 멸치육수를 붓는다.</p> <p class="txt">5. 센 불에서 끓기 시작하면 약한 불로 줄여 무와 고등어가 완전히 익을 때까지 조린다.</p> <p class="txt">6. 마지막에 어슷 썬 대파를 얹는다.</p>',
-            '<p class="txt">1. 오이는 어슷 썰고 굵은 소금을 뿌려 20분간 절인다.</p> <p class="txt">2. 찬물에 여러 번 헹군 후 물기를 제거한다.</p> <p class="txt">3. 양념장을 만들고 절인 오이를 넣어 잘 버무린다.</p> <p class="txt">4. 대파를 얇게 채 썰어 고명으로 얹어 낸다.</p>',
-            '<p class="txt">1. 무는 깨끗이 씻어서 가늘게 채 썬다. 큰 그릇에 무를 담고 굵은 소금을 뿌려 30분간 재운다.</p> <p class="txt">2. 찬물에 헹군 후 물기를 뺀다.</p> <p class="txt">3. 무에 고춧가루를 넣어 붉은 색으로 물을 들인다.</p> <p class="txt">4. 식초, 설탕, 마늘, 생강을 넣고 잘 버무려서 낸다.</p>',
-            '<p class="txt">1. 콩나물은 뿌리를 다듬고 끓는 물에 1분간 데친 후 찬물에 헹궈 물기를 제거한다.</p> <p class="txt">2. 쪽파는 잘게 썬다.</p> <p class="txt">3. 콩나물에 소금, 다진 마늘, 쪽파, 참기름, 참깨를 넣고 잘 버무린다.</p>',
-            '<p class="txt">1. 그릇에 양념장 재료를 넣고 잘 섞는다.</p> <p class="txt">2. 오이는 반 갈라 어슷 썰고 양파는 채 썬다. 쑥갓은 4cm 길이로 썰고 홍고추는 어슷 썬다.<br>상추는 먹기 좋은 크기로 찢는다.</p> <p class="txt">3. 도토리묵은 한 입 크기로 썬다.</p> <p class="txt">4. 도토리묵을 준비된 채소와 함께 양념장에 고루 버무려서 상에 낸다.</p>'
-        )
-        TYPE = ('고기/계란', '채소', '해산물', '채소', '채소', '채소', '채소')
+        NAME = NAMES
+        DETAIL = INGREDIENTS
+        RECIPE = RECIPES
+        TYPE = TYPES
 
         name_count = len(NAME)
         for index in range(name_count):
             RecommendedFood.objects.get_or_create(name=NAME[index], ingredients_detail=DETAIL[index],
-                                                  recipe=RECIPE[index],
-                                                  type=TYPE[index])
+                                                  recipe=RECIPE[index], type=TYPE[index])
         print('RecommendedFood.objects.all() >> ', RecommendedFood.objects.all())
         print('RecommendedFood 객체들이 성공적으로 생성되었습니다.')
 
-        bulgogi = RecommendedFood.objects.filter(name=NAME[0])[0]
-        ssambab = RecommendedFood.objects.filter(name=NAME[1])[0]
-        braised_mac = RecommendedFood.objects.filter(name=NAME[2])[0]
-        cucumber_salad = RecommendedFood.objects.filter(name=NAME[3])[0]
-        white_radish = RecommendedFood.objects.filter(name=NAME[4])[0]
-        bean_sprouts = RecommendedFood.objects.filter(name=NAME[5])[0]
-        acorn_salad = RecommendedFood.objects.filter(name=NAME[6])[0]
+        first = RecommendedFood.objects.filter(name=NAME[0])[0]
+        second = RecommendedFood.objects.filter(name=NAME[1])[0]
+        third = RecommendedFood.objects.filter(name=NAME[2])[0]
+        fourth = RecommendedFood.objects.filter(name=NAME[3])[0]
+        fifth = RecommendedFood.objects.filter(name=NAME[4])[0]
+        sixth = RecommendedFood.objects.filter(name=NAME[5])[0]
+        seventh = RecommendedFood.objects.filter(name=NAME[6])[0]
+        eighth = RecommendedFood.objects.filter(name=NAME[7])[0]
+        nineth = RecommendedFood.objects.filter(name=NAME[8])[0]
+        tenth = RecommendedFood.objects.filter(name=NAME[9])[0]
 
         print('RecommendedFood 객체들에게 각각 변수명을 할당하였습니다.')
 
-        bulgogi.ingredient.add(lemon)
-        bulgogi.ingredient.add(apple)
-        ssambab.ingredient.add(blueberry)
-        ssambab.ingredient.add(apple)
-        braised_mac.ingredient.add(mackerel)
-        cucumber_salad.ingredient.add(blueberry)
-        white_radish.ingredient.add(lemon)
-        bean_sprouts.ingredient.add(blueberry)
-        acorn_salad.ingredient.add(lemon)
+        first.ingredient.add(lemon)
+        first.ingredient.add(apple)
+        second.ingredient.add(blueberry)
+        third.ingredient.add(apple)
+        fourth.ingredient.add(mackerel)
+        fifth.ingredient.add(blueberry)
+        sixth.ingredient.add(lemon)
+        seventh.ingredient.add(blueberry)
+        eighth.ingredient.add(lemon)
+        nineth.ingredient.add(mackerel)
+        tenth.ingredient.add(mackerel)
         print('RecommendedFood 객체들에게 각각 Ingredient 객체들을 추가하였습니다.')
