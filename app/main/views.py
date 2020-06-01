@@ -278,9 +278,13 @@ def like(request, pk):
 
 def recipe(request, pk):
     food = RecommendedFood.objects.get(pk=pk)
+    food_ingredients = food.ingredients_detail.split(',')
+    food_recipe = eval('' + food.recipe + '')
 
     contents = {
         'food': food,
+        'food_ingredients': food_ingredients,
+        'food_recipe': food_recipe,
     }
     return render(request, 'main/recommendation/recipe.html', contents)
 

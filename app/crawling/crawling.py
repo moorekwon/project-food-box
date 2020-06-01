@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 
-from urllib import request
-from urllib.error import HTTPError, URLError
-
 from bs4 import BeautifulSoup
 
 with open('crawling/crawling.html') as fp:
@@ -25,7 +22,6 @@ for food in food_lst:
 # print('URLS >> ', URLS)
 
 not_none_i = list()
-image_api = ''
 for i, food_url in enumerate(URLS):
     path = f'/home/hyojinkwon/project-foodbox/app/crawling/recipe/{i}.html'
 
@@ -35,8 +31,7 @@ for i, food_url in enumerate(URLS):
     food_ingredients = soup.select_one('div#size_ct > h3.stress').next_sibling.next_sibling
     not_none = list()
     for ingredient in food_ingredients:
-        if ingredient.next_sibling is not None:
-            not_none.append(i)
+        if ingredient.next_sibling is not None: not_none.append(i)
     if not_none:
         not_none_i.append(not_none[0])
     else:
@@ -46,8 +41,7 @@ for i, food_url in enumerate(URLS):
     food_recipe = list()
     for recipe in food_recipes:
         if recipe.string is not None:
-            if recipe.string[1] == '.':
-                food_recipe.append(recipe.string)
+            if recipe.string[1] == '.': food_recipe.append(recipe.string)
         else:
             pass
     RECIPES.append(food_recipe)
@@ -66,21 +60,6 @@ for i, food_url in enumerate(URLS):
     food_images = soup.select('div.thmb.c.thmb_border > span.img_box > a > img#innerImage0')
     for image in food_images:
         IMAGE_URLS.append(image['origin_src'])
-
-for i, food_url in enumerate(IMAGE_URLS):
-    # image_path = f'/home/hyojinkwon/project-foodbox/app/static/images/food/{i + 1}.jpg'
-    # try:
-    #     res = request.urlopen(food_url)
-    #     contents = res.read()
-    #     with open(image_path, 'wb') as c:
-    #         c.write(contents)
-    # except HTTPError as e:
-    #     print('httperror occured!')
-    # except URLError as e:
-    #     print('urlerror occured!')
-    # else:
-    #     print('download succeed!')
-    pass
 
 # print('not_none_i >> ', not_none_i)
 print(len(NAMES), len(URLS), len(INGREDIENTS), len(RECIPES), len(TYPES), len(IMAGE_URLS))

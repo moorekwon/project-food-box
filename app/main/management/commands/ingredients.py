@@ -1,8 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.core.management import BaseCommand
 
-from crawling.crawling import NAMES, INGREDIENTS, RECIPES, TYPES, IMAGE_URLS
-from main.models import Ingredient, RecommendedFood
+from crawling.crawling import NAMES, INGREDIENTS, RECIPES, TYPES
+from main.models import Ingredient, RecommendedFood, MyStoredIngredient
 
 User = get_user_model()
 
@@ -40,16 +40,16 @@ class Command(BaseCommand):
                                                   recipe=RECIPE[index], type=TYPE[index])
         print('RecommendedFood 객체들이 성공적으로 생성되었습니다.')
 
-        first = RecommendedFood.objects.filter(name=NAME[0])[0]
-        second = RecommendedFood.objects.filter(name=NAME[1])[0]
-        third = RecommendedFood.objects.filter(name=NAME[2])[0]
-        fourth = RecommendedFood.objects.filter(name=NAME[3])[0]
-        fifth = RecommendedFood.objects.filter(name=NAME[4])[0]
-        sixth = RecommendedFood.objects.filter(name=NAME[5])[0]
-        seventh = RecommendedFood.objects.filter(name=NAME[6])[0]
-        eighth = RecommendedFood.objects.filter(name=NAME[7])[0]
-        nineth = RecommendedFood.objects.filter(name=NAME[8])[0]
-        tenth = RecommendedFood.objects.filter(name=NAME[9])[0]
+        first = RecommendedFood.objects.get(name=NAME[50])
+        second = RecommendedFood.objects.get(name=NAME[51])
+        third = RecommendedFood.objects.get(name=NAME[52])
+        fourth = RecommendedFood.objects.get(name=NAME[53])
+        fifth = RecommendedFood.objects.get(name=NAME[54])
+        sixth = RecommendedFood.objects.get(name=NAME[55])
+        seventh = RecommendedFood.objects.get(name=NAME[46])
+        eighth = RecommendedFood.objects.get(name=NAME[47])
+        nineth = RecommendedFood.objects.get(name=NAME[48])
+        tenth = RecommendedFood.objects.get(name=NAME[49])
         print('RecommendedFood 객체들에게 각각 변수명을 할당하였습니다.')
 
         first.ingredient.add(lemon)
@@ -64,3 +64,10 @@ class Command(BaseCommand):
         nineth.ingredient.add(mackerel)
         tenth.ingredient.add(mackerel)
         print('RecommendedFood 객체들에게 각각 Ingredient 객체들을 추가하였습니다.')
+
+        hjk = User.objects.get(email='hjk@hjk.com')
+        MyStoredIngredient.objects.get_or_create(user=hjk, ingredient=lemon)
+        MyStoredIngredient.objects.get_or_create(user=hjk, ingredient=blueberry)
+        MyStoredIngredient.objects.get_or_create(user=hjk, ingredient=mackerel)
+        MyStoredIngredient.objects.get_or_create(user=hjk, ingredient=apple)
+        print('user가 hjk인 MyStoredIngredient 객체들을 추가하였습니다.')

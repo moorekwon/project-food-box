@@ -16,11 +16,6 @@ ol {
 }
 
 
-
-
-
-
-
 </style>
 {% endblock %}
 
@@ -42,14 +37,15 @@ ol {
 {% block content %}
 <div class="container">
     <div class="card border-0 shadow my-5">
-        <h1 class="px-5 pt-5" style="color: #79bd9a;">쌈밥</h1>
+        <h1 class="px-5 pt-5" style="color: #79bd9a;">{{ food.name }}</h1>
         <div class="card-body px-5 py-3">
-            <h3 class="font-weight-light mt-4 mb-0">주재료</h3>
+            <h3 class="font-weight-light mt-4 mb-0">재료</h3>
             <hr class="my-3">
             <ul class="row text-lg-left list-unstd appyled m-0 p-0">
                 <li class="col p-0">
+                    {% for ingredient in food_ingredients %}
                     <p class="media pt-2 m-0" style="color: #212529; font-size: 1.4rem !important;">
-                        쌀 2컵
+                        {{ ingredient }}
                         <a href="" style="height: 38px;">
                             <svg class="bi bi-cart-plus mx-4" width="1em" height="1em" viewBox="0 0 16 16"
                                  fill="currentColor"
@@ -63,60 +59,7 @@ ol {
                             </svg>
                         </a>
                     </p>
-                    <p class="media pt-2 m-0" style="color: #212529; font-size: 1.4rem !important;">
-                        취나물 300g
-                        <a href="" style="height: 38px;">
-                            <svg class="bi bi-cart-plus mx-4" width="1em" height="1em" viewBox="0 0 16 16"
-                                 fill="currentColor"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M8.5 5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 .5-.5z"/>
-                                <path fill-rule="evenodd"
-                                      d="M8 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0v-2z"/>
-                                <path fill-rule="evenodd"
-                                      d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-                            </svg>
-                        </a>
-                    </p>
-                </li>
-            </ul>
-        </div>
-
-        <div class="card-body px-5 py-3">
-            <h3 class="font-weight-light mt-4 mb-0">부재료</h3>
-            <hr class="my-3">
-            <ul class="row text-lg-left list-unstd appyled m-0 p-0">
-                <li class="col p-0">
-                    <p class="media pt-2 m-0" style="color: #212529; font-size: 1.4rem !important;">
-                        쌀 2컵
-                        <a href="" style="height: 38px;">
-                            <svg class="bi bi-cart-plus mx-4" width="1em" height="1em" viewBox="0 0 16 16"
-                                 fill="currentColor"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M8.5 5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 .5-.5z"/>
-                                <path fill-rule="evenodd"
-                                      d="M8 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0v-2z"/>
-                                <path fill-rule="evenodd"
-                                      d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-                            </svg>
-                        </a>
-                    </p>
-                    <p class="media pt-2 m-0" style="color: #212529; font-size: 1.4rem !important;">
-                        취나물 300g
-                        <a href="" style="height: 38px;">
-                            <svg class="bi bi-cart-plus mx-4" width="1em" height="1em" viewBox="0 0 16 16"
-                                 fill="currentColor"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M8.5 5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 .5-.5z"/>
-                                <path fill-rule="evenodd"
-                                      d="M8 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0v-2z"/>
-                                <path fill-rule="evenodd"
-                                      d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-                            </svg>
-                        </a>
-                    </p>
+                    {% endfor %}
                 </li>
             </ul>
         </div>
@@ -125,8 +68,9 @@ ol {
             <h3 class="font-weight-light mt-4 mb-0">조리과정</h3>
             <hr class="my-3">
             <ol class="text-lg-left" style="list-style: none;">
-                <p>취나물은 가볍게 데친 후 물기를 빼서 준비합니다.</p>
-                <p>나물을 데치는 동안 취나물밥에 곁들일 양념장을 만들어주세요.</p>
+                {% for recipe in food_recipe %}
+                <p>{{ recipe }}</p>
+                {% endfor %}
             </ol>
         </div>
     </div>
