@@ -20,14 +20,18 @@ from django.urls import path, include
 
 from main.views import trigger_error, start
 
+urlpatterns_apis = [
+    path('members/', include('members.urls.apis')),
+]
+
 urlpatterns = [
     path('debug/', trigger_error),
-
     path('admin/', admin.site.urls),
+    path('api/', include(urlpatterns_apis)),
 
     path('', start, name='start'),
     path('main/', include('main.urls')),
-    path('members/', include('members.urls')),
+    path('members/', include('members.urls.views')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
