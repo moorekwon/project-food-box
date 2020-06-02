@@ -32,8 +32,8 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     GENDER = (
-        ('male', '남자'),
-        ('female', '여자'),
+        ('남자', '남자'),
+        ('여자', '여자'),
     )
 
     email = models.EmailField(max_length=60, unique=True)

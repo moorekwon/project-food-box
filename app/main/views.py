@@ -1,7 +1,5 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from config.settings import SECRETS
 from main.models import Ingredient, MyStoredIngredient, MyMemoIngredient, RecommendedFood
 
 

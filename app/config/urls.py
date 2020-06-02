@@ -20,17 +20,12 @@ from django.urls import path, include
 
 from main.views import trigger_error, start
 
-urlpatterns_apis = [
-    path('members/', include('members.urls.apis')),
-]
-
 urlpatterns = [
     path('debug/', trigger_error),
     path('admin/', admin.site.urls),
-    path('api/', include(urlpatterns_apis)),
 
     path('', start, name='start'),
-    path('main/', include('main.urls')),
+    path('main/', include('main.urls.views')),
     path('members/', include('members.urls.views')),
 ]
 
