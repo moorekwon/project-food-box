@@ -26,6 +26,8 @@ def signin(request):
 def signup(request):
     if request.method == 'POST':
         email = request.POST['email']
+        nickname = request.POST['nickname']
+        birth = request.POST['birth']
         password = request.POST['password']
         users = User.objects.all()
 
@@ -35,7 +37,14 @@ def signup(request):
                 'error_msg': error_msg,
             }
             return render(request, 'members/signup.html', context)
-        user = User.objects.create_user(email=email, password=password)
+        if users.filter(nickname=nickname):
+            error_msg = '이미 사용중인 nickname 입니다.'
+            context = {
+                'error_msg': error_msg,
+            }
+            return render(request, 'members/signup.html', context)
+
+        user = User.objects.create_user(email=email, nickname=nickname, birth=birth, password=password)
         login(request, user)
         return redirect('main:fridge')
     return render(request, 'members/signup.html')
