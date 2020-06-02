@@ -3,20 +3,20 @@ from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from members.serializers import UserSerializer
 
 User = get_user_model()
 
 
-@api_view(['GET', 'POST'])
-def user_list(request, format=None):
-    if request.method == 'GET':
+class UserList(APIView):
+    def get(self, request, format=None):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
+    def post(self, request, format=None):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -24,13 +24,14 @@ def user_list(request, format=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
-def user_detail(request, pk, format=None):
-    try:
-        user = User.objects.get(pk=pk)
-    except User.DoesNotExist:
-        return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+class UserDetail(APIView):
+    def get_object(self, pk):
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == 'GET':
+    def get(self, request, pk, format=None):
+        user = self.get_object(pk)
         serializer = UserSerializer(user)
         return Response(serializer.data)
