@@ -5,21 +5,24 @@ from django.db import models
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, nickname, birth, password=None):
+    def create_user(self, email, nickname, birth, gender, password=None):
         if not email:
             raise ValueError('email 주소가 필요합니다.')
         if not nickname:
             raise ValueError('nickname이 필요합니다.')
         if not birth:
             raise ValueError('생년월일 정보가 필요합니다.')
+        if not gender:
+            raise ValueError('성별 정보가 필요합니다.')
 
-        user = self.model(email=self.normalize_email(email), nickname=nickname, birth=birth)
+        user = self.model(email=self.normalize_email(email), nickname=nickname, birth=birth, gender=gender)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, nickname, birth, password):
-        user = self.create_user(email=self.normalize_email(email), nickname=nickname, birth=birth, password=password)
+    def create_superuser(self, email, nickname, birth, gender, password):
+        user = self.create_user(email=self.normalize_email(email), nickname=nickname, birth=birth, gender=gender,
+                                password=password)
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
@@ -45,7 +48,7 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['nickname', 'birth']
+    REQUIRED_FIELDS = ['nickname', 'birth', 'gender', ]
 
     objects = UserManager()
 
@@ -58,10 +61,28 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
-    def age(self):
+    def line(self):
         if self.birth:
+            today = datetime.date.today()
+            today_year = str(today).split('-')[0]
             birth_year = str(self.birth).split('-')[0]
-            print('birth_year >> ', birth_year)
-            return f'{int(birth_year)}대'
+            age = int(today_year) - int(birth_year) + 1
+            if 0 < age < 10:
+                line = '10대 미만'
+            elif 10 <= age < 20:
+                line = '10대'
+            elif 20 <= age < 30:
+                line = '20대'
+            elif 30 <= age < 40:
+                line = '30대'
+            elif 40 <= age < 50:
+                line = '40대'
+            elif 50 <= age < 60:
+                line = '50대'
+            elif 60 <= age < 70:
+                line = '60대'
+            elif 70 <= age:
+                line = '70대 이상'
+            return line
         else:
             pass

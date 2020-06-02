@@ -28,6 +28,7 @@ def signup(request):
         email = request.POST['email']
         nickname = request.POST['nickname']
         birth = request.POST['birth']
+        gender = request.POST['gender']
         password = request.POST['password']
         users = User.objects.all()
 
@@ -44,7 +45,7 @@ def signup(request):
             }
             return render(request, 'members/signup.html', context)
 
-        user = User.objects.create_user(email=email, nickname=nickname, birth=birth, password=password)
+        user = User.objects.create_user(email=email, nickname=nickname, birth=birth, gender=gender, password=password)
         login(request, user)
         return redirect('main:fridge')
     return render(request, 'members/signup.html')
