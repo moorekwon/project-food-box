@@ -1,3 +1,5 @@
+import unittest
+
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings, Client
 from django.urls import reverse
@@ -11,4 +13,13 @@ class ImageTest(TestCase):
         client = Client()
         image = SimpleUploadedFile('image_1.jpg', image_1, content_type='image/jpg')
         res = client.post(reverse('main:fridge'), {'image': image, 'name': 'image_1'})
+        self.assertEqual(res.status_code, 200)
+
+
+class SimpleTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_details(self):
+        res = self.client.get('/main/fridge/')
         self.assertEqual(res.status_code, 200)
