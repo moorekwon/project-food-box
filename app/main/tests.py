@@ -1,8 +1,8 @@
-import unittest
-
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings, Client
 from django.urls import reverse
+
+from main.models import Ingredient
 
 image_1 = b'https://images.unsplash.com/photo-1565043534447-a83eeb658a05?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1043&q=80'
 
@@ -16,10 +16,12 @@ class ImageTest(TestCase):
         self.assertEqual(res.status_code, 200)
 
 
-class SimpleTest(unittest.TestCase):
+class SimpleTest(TestCase):
     def setUp(self):
         self.client = Client()
 
     def test_details(self):
         res = self.client.get('/main/fridge/')
+        # print('dir(res) >> ', dir(res.request))
+        # print('res.request >> ', res.request)
         self.assertEqual(res.status_code, 200)
