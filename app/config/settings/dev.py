@@ -1,5 +1,4 @@
 import sentry_sdk
-from sentry_sdk import Hub
 from sentry_sdk.integrations.django import DjangoIntegration
 
 from .base import *
