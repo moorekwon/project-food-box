@@ -27,8 +27,9 @@
             <img src="../../static/images/park-street-uI900SItAyY-unsplash.jpg" style="width: 60px; border-radius: 4px;"
                  alt="">
         </a>
-        <span style="color: #79bd9a;">{{ request.user.nickname }} <small style="color: #3b8686;">{{ request.user.line }} {{ request.user.gender }}</small></span>
+        <span style="color: #47b8e0;">{{ request.user.nickname }} <small style="color: #47b8e0;">{{ request.user.line }} {{ request.user.gender }}</small></span>
         <a href="{% url 'members:logoff' %}" class="mx-5 logout">로그아웃하기</a>
+        <a href="" style="color: #ff7473;">마이페이지</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

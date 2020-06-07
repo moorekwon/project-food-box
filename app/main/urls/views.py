@@ -30,5 +30,5 @@ urlpatterns = [
     path('recommendation/recipe/<int:pk>/', views.recipe, name='recipe'),
     path('recommendation/like/<int:pk>/', views.like, name='like'),
 
-    path('blog/', views.blog, name='blog'),
+    path('store/', views.store, name='store'),
 ]

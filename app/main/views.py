@@ -287,5 +287,5 @@ def recipe(request, pk):
     return render(request, 'main/recommendation/recipe.html', contents)
 
 
-def blog(request):
-    return render(request, 'main/blog/blog.html')
+def store(request):
+    return render(request, 'main/store/store.html')
