@@ -15,7 +15,29 @@ ol {
     padding: 0;
 }
 
+div.d-flex > strong {
+    color: #333030;
+}
 
+div.d-flex > a {
+    color: #ff7473;
+}
+
+span.d-block {
+    color: #8b8687;
+}
+
+div.media-body > p {
+    color: #a3a1a1;
+}
+
+div.card-body > h6 {
+    color: #f9a11b;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #ffc952 !important;
+}
 </style>
 {% endblock %}
 
@@ -72,6 +94,49 @@ ol {
                 <p>{{ recipe }}</p>
                 {% endfor %}
             </ol>
+        </div>
+
+        <div class="card-body px-5 py-3">
+            <h6 class="border-bottom border-gray pb-2 mb-0">쿡톡</h6>
+            <div class="media text-muted pt-3">
+                <!--                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32"-->
+                <!--                     xmlns="http://www.w3.org/2000/svg"-->
+                <!--                     preserveAspectRatio="xMidYMid slice" focusable="false" role="img"-->
+                <!--                     aria-label="Placeholder: 32x32">-->
+                <!--                    <title>Placeholder</title>-->
+                <!--                    <rect width="100%" height="100%" fill="#007bff"></rect>-->
+                <!--                    <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>-->
+                <!--                </svg>-->
+                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <strong>hjk</strong>
+                        <a href="#">Follow</a>
+                    </div>
+                    <span class="d-block">맛있게 먹고 있습니다.</span>
+                    <p class="m-0"><small>4달 전</small></p>
+                </div>
+            </div>
+            <div class="media text-muted pt-3">
+                <!--                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32"-->
+                <!--                     xmlns="http://www.w3.org/2000/svg"-->
+                <!--                     preserveAspectRatio="xMidYMid slice" focusable="false" role="img"-->
+                <!--                     aria-label="Placeholder: 32x32">-->
+                <!--                    <title>Placeholder</title>-->
+                <!--                    <rect width="100%" height="100%" fill="#007bff"></rect>-->
+                <!--                    <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>-->
+                <!--                </svg>-->
+                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <strong>djflksfkjlsdkfjlskfdlk</strong>
+                        <a href="#">Follow</a>
+                    </div>
+                    <span class="d-block">설탕 2큰술은 돼야 할 것 같네요..</span>
+                    <p class="m-0"><small>4달 전</small></p>
+                </div>
+            </div>
+            <small class="d-block text-right mt-3">
+                <a href="#">All suggestions</a>
+            </small>
         </div>
     </div>
 </div>
