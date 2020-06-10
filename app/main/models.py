@@ -99,3 +99,10 @@ class RecommendedFood(models.Model):
 
     def user_count(self):
         return len(self.user.all())
+
+
+class FoodComment(models.Model):
+    food = models.ForeignKey(RecommendedFood, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=300)
+    created_at = models.DateTimeField(auto_now_add=True)

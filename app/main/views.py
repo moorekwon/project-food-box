@@ -279,10 +279,13 @@ def recipe(request, pk):
     food_ingredients = food.ingredients_detail.split(',')
     food_recipe = eval('' + food.recipe + '')
 
+    comments = food.foodcomment_set.all()
+
     contents = {
         'food': food,
         'food_ingredients': food_ingredients,
         'food_recipe': food_recipe,
+        'comments': comments,
     }
     return render(request, 'main/recommendation/recipe.html', contents)
 
