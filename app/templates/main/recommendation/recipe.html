@@ -41,8 +41,6 @@ div.card-body > h6 {
 
 
 
-
-
 </style>
 {% endblock %}
 
@@ -103,17 +101,19 @@ div.card-body > h6 {
 
         <div class="card-body px-5 py-3">
             <h6 class="border-bottom border-gray pb-2 mb-0">쿡톡</h6>
-            <form class="was-validated">
+            <form class="was-validated" action="{% url 'main:comment-create' pk=food.pk %}" method="post">
+                {% csrf_token %}
                 <div class="mb-1">
                     <label for="validationTextarea"></label>
-                    <textarea class="form-control" id="validationTextarea"
+                    <textarea class="form-control" id="validationTextarea" name="input_comment"
                               style="background-image: none; border-color: #ffc952;"
                               placeholder="쿡톡 댓글을 남겨주세요" required></textarea>
                 </div>
-                <button type="button" class="btn btn-primary btn-sm"
-                        style="background-color: #ffc952; border-color: #ffc952;">button
+                <button type="submit" class="btn btn-primary btn-sm"
+                        style="background-color: #ffc952; border-color: #ffc952;">쿡톡남기기
                 </button>
             </form>
+
             {% if comments %}
             {% for comment in comments %}
             <div class="media text-muted pt-3">
@@ -131,7 +131,7 @@ div.card-body > h6 {
                         <a href="#">Follow</a>
                     </div>
                     <span class="d-block">{{ comment.comment }}</span>
-                    <p class="m-0"><small>{{ comment.created_at }}</small></p>
+                    <p class="m-0"><small>{{ comment.created_date }}</small></p>
                 </div>
             </div>
             {% endfor %}

@@ -251,7 +251,7 @@ def recommendation(request):
 
         food_all = food_br + food_ve + food_ma + food_me + food_ri + food_ki + food_de
 
-        contents = {
+        context = {
             'food_all_set': set(food_all),
             'food_br_set': set(food_br),
             'food_ve_set': set(food_ve),
@@ -261,7 +261,7 @@ def recommendation(request):
             'food_ki_set': set(food_ki),
             'food_de_set': set(food_de),
         }
-        return render(request, 'main/recommendation/recommendation.html', contents)
+        return render(request, 'main/recommendation/recommendation.html', context)
     return redirect('main:recommendation')
 
 
@@ -281,13 +281,23 @@ def recipe(request, pk):
 
     comments = food.foodcomment_set.all()
 
-    contents = {
+    context = {
         'food': food,
         'food_ingredients': food_ingredients,
         'food_recipe': food_recipe,
         'comments': comments,
     }
-    return render(request, 'main/recommendation/recipe.html', contents)
+    return render(request, 'main/recommendation/recipe.html', context)
+
+
+def comment_create(request, pk):
+    if request.method == 'POST':
+        food = RecommendedFood.objects.get(pk=pk)
+        user = request.user
+        comment = request.POST['input_comment']
+        food.foodcomment_set.create(user=user, comment=comment)
+
+        return redirect('main:recipe', pk=food.pk)
 
 
 def store(request):

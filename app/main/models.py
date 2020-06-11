@@ -105,4 +105,12 @@ class FoodComment(models.Model):
     food = models.ForeignKey(RecommendedFood, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.CharField(max_length=300)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-pk',)
+
+    def created_date(self):
+        today = datetime.date.today()
+        date = today - self.created_at
+        return f'{date.days}일 전'
