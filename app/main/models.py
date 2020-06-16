@@ -75,6 +75,9 @@ class MyMemoIngredient(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     status = models.CharField(choices=STATUS, max_length=20, default='not_checked')
 
+    def __str__(self):
+        return self.ingredient
+
 
 class RecommendedFood(models.Model):
     TYPE = (
@@ -109,6 +112,9 @@ class FoodComment(models.Model):
 
     class Meta:
         ordering = ('-pk',)
+
+    def __str__(self):
+        return self.food.name, self.user.nickname
 
     def created_date(self):
         today = datetime.date.today()
