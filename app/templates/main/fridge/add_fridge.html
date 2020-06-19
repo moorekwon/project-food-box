@@ -16,6 +16,7 @@
 
 <body>
 <form action="{% url 'main:add-fridge' %}" method="get" class="form-inline mt-5">
+    {% csrf_token %}
     <input name="search_text" type="text" class="form-control mr-sm-2 mb-3">
     <button type="submit" class="btn btn-sm btn-outline-dark mb-3">재료 검색</button>
     <a href="{% url 'main:add-fridge' %}" class="btn btn-sm btn-outline-dark ml-2 mb-3">전체 보기</a>

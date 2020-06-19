@@ -46,13 +46,10 @@ def fridge(request):
 
 def add_fridge(request):
     ingredients = Ingredient.objects.all().order_by('name')
-
     search_text = request.GET.get('search_text')
 
-    if search_text:
+    if search_text != '' and search_text is not None:
         ingredients = ingredients.filter(name__contains=search_text)
-    else:
-        ingredients = ingredients
 
     context = {
         'ingredients': ingredients,
