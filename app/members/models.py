@@ -1,7 +1,12 @@
 import datetime
 
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.core.validators import MaxLengthValidator, MinLengthValidator, RegexValidator
 from django.db import models
+
+
+class Duration(models.Model):
+    duration = models.IntegerField(validators=[RegexValidator(regex=r'^\d\d\d\d')])
 
 
 class UserManager(BaseUserManager):
