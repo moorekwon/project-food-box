@@ -1,0 +1,11 @@
+.git
+.gitignore
+
+.idea
+app/.ipynb_checkpoints
+
+Dockerfile
+secrets.json
+
+#app/config/settings/dev.py
+app/config/wsgi/dev.py

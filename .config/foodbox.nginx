@@ -1,0 +1,14 @@
+server {
+    listen              80;
+    server_name         ec2-52-78-127-12.ap-northeast-2.compute.amazonaws.com;
+    charset             utf-8;
+
+    location / {
+        include         /etc/nginx/proxy_params;
+        proxy_pass      http://unix:/run/foodbox.sock;
+    }
+
+    location /static/ {
+        alias           /srv/foodbox/.static/;
+    }
+}

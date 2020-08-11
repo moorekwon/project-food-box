@@ -350,6 +350,23 @@ version = "0.3"
 
 [[package]]
 category = "main"
+description = "WSGI HTTP Server for UNIX"
+name = "gunicorn"
+optional = false
+python-versions = ">=3.4"
+version = "20.0.4"
+
+[package.dependencies]
+setuptools = ">=3.0"
+
+[package.extras]
+eventlet = ["eventlet (>=0.9.7)"]
+gevent = ["gevent (>=0.13)"]
+setproctitle = ["setproctitle"]
+tornado = ["tornado (>=0.2)"]
+
+[[package]]
+category = "main"
 description = "HTTPie - a CLI, cURL-like tool for humans."
 name = "httpie"
 optional = false
@@ -1063,7 +1080,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "dc7de57d7af3f29fa3b41a540a50a4f9b7eb881bea7cce0c8b99104c28e7d6fc"
+content-hash = "6105411831cb4b5e7063f32df1ca7e5fa1a2973c11852ae73299715f06333eca"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -1237,6 +1254,10 @@ docutils = [
 entrypoints = [
     {file = "entrypoints-0.3-py2.py3-none-any.whl", hash = "sha256:589f874b313739ad35be6e0cd7efde2a4e9b6fea91edcc34e58ecbb8dbe56d19"},
     {file = "entrypoints-0.3.tar.gz", hash = "sha256:c70dd71abe5a8c85e55e12c19bd91ccfeec11a6e99044204511f9ed547d48451"},
+]
+gunicorn = [
+    {file = "gunicorn-20.0.4-py2.py3-none-any.whl", hash = "sha256:cd4a810dd51bf497552cf3f863b575dabd73d6ad6a91075b65936b151cbf4f9c"},
+    {file = "gunicorn-20.0.4.tar.gz", hash = "sha256:1904bb2b8a43658807108d59c3f3d56c2b6121a701161de0ddf9ad140073c626"},
 ]
 httpie = [
     {file = "httpie-2.2.0-py3-none-any.whl", hash = "sha256:aab111d347a3059ba507aa9339c621e5cae6658cc96f365cd6a32ae0fb6ad8aa"},

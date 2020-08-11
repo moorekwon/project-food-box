@@ -1,20 +1,7 @@
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-
 from .base import *
-
-SECRETS = SECRETS_FULL['dev']
 
 DEBUG = True
 WSGI_APPLICATION = 'config.wsgi.dev.application'
-
-sentry_sdk.init(
-    dsn=SECRETS['SENTRY_DSN'],
-    integrations=[DjangoIntegration()],
-    send_default_pii=True,
-    max_breadcrumbs=50,
-    debug=False,
-)
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
